@@ -22,6 +22,12 @@ A rhythm game made with HTML5 and JavaScript.
 [template.html](./template.html)
 
 ## How to
+### To set Audio File
+```js
+let audioFile = "audio.ogg";
+```
+> Plays "audio.ogg" as the game starts.
+
 ### To set BPM,
 ```js
 ['b', 120, 1]
@@ -34,7 +40,7 @@ If you want to change it again,
 ```
 > BPM: 180, Offset: 1.5s (from the beginning of the audio)
 
-The offset works along the bpm. The default bpm is 60, so you can set it in seconds in initial setting.
+The offset works along the bpm. The default bpm is 60, so you can set it in seconds in the initial setting.
 
 ### To add a note,
 ```js
