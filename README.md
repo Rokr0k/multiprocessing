@@ -1,5 +1,6 @@
 # multiprocessing
 A rhythm game made with HTML5 and JavaScript.
+[Go to](https://01320nabi.github.io/multiprocessing)
 
 ## Fish Part
 > - A fish is swimming through rings.
