@@ -1,16 +1,17 @@
 let cvs;
 let ctx;
 let playButton = document.getElementById('play');
-let audio = new Audio(audioFile);
-let __$__$_ = false;
+let audio = new Audio();
+audio.src = audioFile;
 audio.preload = 'auto';
-audio.addEventListener('canplaythrough', e=>playButton.disabled = false);
+let __$__$_ = false;
+audio.addEventListener('canplaythrough', e=>playButton.disabled = false, false);
 playButton.onclick = function() {
 	init();
-	audio.play();
 	window.onkeydown = keydown;
 	window.onkeyup = keyup;
 	draw();
+	audio.play();
 };
 window.onkeydown = function(e) {
 	if(!playButton.disabled&&e.keyCode==80)
@@ -285,7 +286,7 @@ function keydown(e) {
 				break;
 			}
 		break;
-	case 32:
+/*	case 32:
 		if(audio.paused)
 			audio.play();
 		else
@@ -296,7 +297,7 @@ function keydown(e) {
 		break;
 	case 39:
 		audio.currentTime += 10;
-		break;
+		break;*/
 	}
 }
 function keyup(e) {
