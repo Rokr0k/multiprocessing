@@ -5,7 +5,7 @@ let audio = new Audio();
 audio.src = audioFile;
 audio.preload = 'auto';
 let __$__$_ = false;
-audio.addEventListener('canplaythrough', e=>playButton.disabled = false, false);
+audio.addEventListener('canplaythrough', e=>playButton.disabled = false);
 playButton.onclick = function() {
 	init();
 	window.onkeydown = keydown;
