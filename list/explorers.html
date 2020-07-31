@@ -17,6 +17,9 @@ html, body {
 canvas {
 	cursor: none;
 }
+* {
+	user-select: none;
+}
 </style>
 </head>
 <body>
@@ -210,7 +213,7 @@ const tmp5 = 364/110*60+0.165;
 const tmpk = ['F', 'J', 'D', 'K']
 let gm2 = true;
 function gimmick() {
-	return false;
+	// pass;
 }
 function lategimmick() {
 	if(time>tmp1&&time<tmp2) {

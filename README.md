@@ -48,8 +48,6 @@ The offset works along the bpm. The default bpm is 60, so you can set it in seco
 ['n', 0, 10], ['n', 1, 11], ['n', 2, 12], ['n', 3, 13], ['n', 3, 14, 2]
 ```
 > Fish note on 10th beat, Ball note on 11th beat, Shoot note on 12th beat, Draw notes on 13th and 14th~16th beat.
-
-### Add these together,
 ```js
 let crochet = [['b', 120, 1], ['n', 0, 0], ['n', 1, 1], ['n', 3, 2], ['n', 2, 5]];
 ```
@@ -58,12 +56,21 @@ let crochet = [['b', 120, 1], ['n', 0, 0], ['n', 1, 1], ['n', 3, 2], ['n', 2, 5]
 High-end users may make some gimmick patterns in their levels.
 ```js
 function gimmick() { // Code before the graphics are completely drawn.
-    return false; // return true if you want to disable ignoring notes that might appear later.
+    // pass;
 }
 function lategimmick() { // Code after the graphics are completely drawn.
     // pass;
 }
 ```
+> You can draw above or below the original graphics, or just totally another game.
+
+For performance, notes that would probably not seen based on original graphics are not rendered. If you want to render them, modify following variable.
+```js
+drawRange[0].min = 0;
+drawRange[0].max = nList[0].length;
+```
+> It would make every notes in Fish part rendered, may occur lags.
+
 You can refer to the gameplay.js file as you make gimmick patterns, but you may not modify it for compability. ~~I appologize because I didn't make enough comments and the fish image is in base64 code :(~~
 
 Soon I will add comments to gameplay.js file, so please wait.
