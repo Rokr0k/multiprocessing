@@ -219,32 +219,35 @@ function lategimmick() {
 	if(time>tmp1&&time<tmp2) {
 		ctx.fillStyle = 'yellow';
 		ctx.fillRect(0, 0, cvs.width, cvs.height);
-		ctx.fillStyle = cList[0][143].s==0?'dodgerblue':cList[0][143].s>0?'green':'red';
+		ctx.fillStyle = nList[0][143].s==0?'dodgerblue':nList[0][143].s>0?'green':'red';
 		ctx.fillText('F', cvs.width/2-cvs.width/16*1.5, cvs.height/2-cvs.height/16);
-		ctx.fillStyle = cList[1][186].s==0?'dodgerblue':cList[1][186].s>0?'green':'red';
+		ctx.fillStyle = nList[1][186].s==0?'dodgerblue':nList[1][186].s>0?'green':'red';
 		ctx.fillText('J', cvs.width/2-cvs.width/16*0.5, cvs.height/2-cvs.height/16);
-		ctx.fillStyle = cList[2][18].s==0?'dodgerblue':cList[2][18].s>0?'green':'red';
+		ctx.fillStyle = nList[2][18].s==0?'dodgerblue':nList[2][18].s>0?'green':'red';
 		ctx.fillText('D', cvs.width/2+cvs.width/16*0.5, cvs.height/2-cvs.height/16);
-		ctx.fillStyle = cList[3][498].s==0?'dodgerblue':cList[3][498].s>0?'green':'red';
+		ctx.fillStyle = nList[3][498].s==0?'dodgerblue':nList[3][498].s>0?'green':'red';
 		ctx.fillText('K', cvs.width/2+cvs.width/16*1.5, cvs.height/2-cvs.height/16);
-		ctx.fillStyle = cList[0][144].s==0?'dodgerblue':cList[0][144].s>0?'green':'red';
+		ctx.fillStyle = nList[0][144].s==0?'dodgerblue':nList[0][144].s>0?'green':'red';
 		ctx.fillText('F', cvs.width/2-cvs.width/16*1.5, cvs.height/2);
-		ctx.fillStyle = cList[1][187].s==0?'dodgerblue':cList[1][187].s>0?'green':'red';
+		ctx.fillStyle = nList[1][187].s==0?'dodgerblue':nList[1][187].s>0?'green':'red';
 		ctx.fillText('J', cvs.width/2-cvs.width/16*0.5, cvs.height/2);
-		ctx.fillStyle = cList[2][19].s==0?'dodgerblue':cList[2][19].s>0?'green':'red';
+		ctx.fillStyle = nList[2][19].s==0?'dodgerblue':nList[2][19].s>0?'green':'red';
 		ctx.fillText('D', cvs.width/2+cvs.width/16*0.5, cvs.height/2);
-		ctx.fillStyle = cList[3][499].s==0?'dodgerblue':cList[3][499].s>0?'green':'red';
+		ctx.fillStyle = nList[3][499].s==0?'dodgerblue':nList[3][499].s>0?'green':'red';
 		ctx.fillText('K', cvs.width/2+cvs.width/16*1.5, cvs.height/2);
-		ctx.fillStyle = cList[0][145].s==0?'dodgerblue':cList[0][145].s>0?'green':'red';
+		ctx.fillStyle = nList[0][145].s==0?'dodgerblue':nList[0][145].s>0?'green':'red';
 		ctx.fillText('F', cvs.width/2-cvs.width/16*1.5, cvs.height/2+cvs.height/16);
-		ctx.fillStyle = cList[1][188].s==0?'dodgerblue':cList[1][188].s>0?'green':'red';
+		ctx.fillStyle = nList[1][188].s==0?'dodgerblue':nList[1][188].s>0?'green':'red';
 		ctx.fillText('J', cvs.width/2-cvs.width/16*0.5, cvs.height/2+cvs.height/16);
-		ctx.fillStyle = cList[2][20].s==0?'dodgerblue':cList[2][20].s>0?'green':'red';
+		ctx.fillStyle = nList[2][20].s==0?'dodgerblue':nList[2][20].s>0?'green':'red';
 		ctx.fillText('D', cvs.width/2+cvs.width/16*0.5, cvs.height/2+cvs.height/16);
-		ctx.fillStyle = cList[3][500].s==0?'dodgerblue':cList[3][500].s>0?'green':'red';
+		ctx.fillStyle = nList[3][500].s==0?'dodgerblue':nList[3][500].s>0?'green':'red';
 		ctx.fillText('K', cvs.width/2+cvs.width/16*1.5, cvs.height/2+cvs.height/16);
 	} else if(gm1&&time>tmp2) {
-		tdraw = [146, 189, 21, 501];
+		drawRange[0].min = 146
+		drawRange[1].min = 189
+		drawRange[2].min = 21
+		drawRange[3].min = 501;
 		gm1 = false;
 	}
 	if(time>tmp3&&time<tmp5) {
@@ -256,32 +259,35 @@ function lategimmick() {
 			ctx.fillStyle = 'yellow';
 			ctx.fillRect(0, 0, cvs.width, cvs.height);
 		}
-		ctx.fillStyle = cList[rnd[0]][l[rnd[0]]].s==0?'blue':cList[rnd[0]][l[rnd[0]]++].s>0?'green':'red';
+		ctx.fillStyle = nList[rnd[0]][l[rnd[0]]].s==0?'blue':nList[rnd[0]][l[rnd[0]]++].s>0?'green':'red';
 		ctx.fillText(tmpk[rnd[0]], cvs.width/2-cvs.width/16*1.5, cvs.height/2-cvs.height/16);
-		ctx.fillStyle = cList[rnd[1]][l[rnd[1]]].s==0?'blue':cList[rnd[1]][l[rnd[1]]++].s>0?'green':'red';
+		ctx.fillStyle = nList[rnd[1]][l[rnd[1]]].s==0?'blue':nList[rnd[1]][l[rnd[1]]++].s>0?'green':'red';
 		ctx.fillText(tmpk[rnd[1]], cvs.width/2-cvs.width/16*0.5, cvs.height/2-cvs.height/16);
-		ctx.fillStyle = cList[rnd[2]][l[rnd[2]]].s==0?'blue':cList[rnd[2]][l[rnd[2]]++].s>0?'green':'red';
+		ctx.fillStyle = nList[rnd[2]][l[rnd[2]]].s==0?'blue':nList[rnd[2]][l[rnd[2]]++].s>0?'green':'red';
 		ctx.fillText(tmpk[rnd[2]], cvs.width/2+cvs.width/16*0.5, cvs.height/2-cvs.height/16);
-		ctx.fillStyle = cList[rnd[3]][l[rnd[3]]].s==0?'blue':cList[rnd[3]][l[rnd[3]]++].s>0?'green':'red';
+		ctx.fillStyle = nList[rnd[3]][l[rnd[3]]].s==0?'blue':nList[rnd[3]][l[rnd[3]]++].s>0?'green':'red';
 		ctx.fillText(tmpk[rnd[3]], cvs.width/2+cvs.width/16*1.5, cvs.height/2-cvs.height/16);
-		ctx.fillStyle = cList[rnd[4]][l[rnd[4]]].s==0?'blue':cList[rnd[4]][l[rnd[4]]++].s>0?'green':'red';
+		ctx.fillStyle = nList[rnd[4]][l[rnd[4]]].s==0?'blue':nList[rnd[4]][l[rnd[4]]++].s>0?'green':'red';
 		ctx.fillText(tmpk[rnd[4]], cvs.width/2-cvs.width/16*1.5, cvs.height/2);
-		ctx.fillStyle = cList[rnd[5]][l[rnd[5]]].s==0?'blue':cList[rnd[5]][l[rnd[5]]++].s>0?'green':'red';
+		ctx.fillStyle = nList[rnd[5]][l[rnd[5]]].s==0?'blue':nList[rnd[5]][l[rnd[5]]++].s>0?'green':'red';
 		ctx.fillText(tmpk[rnd[5]], cvs.width/2-cvs.width/16*0.5, cvs.height/2);
-		ctx.fillStyle = cList[rnd[6]][l[rnd[6]]].s==0?'blue':cList[rnd[6]][l[rnd[6]]++].s>0?'green':'red';
+		ctx.fillStyle = nList[rnd[6]][l[rnd[6]]].s==0?'blue':nList[rnd[6]][l[rnd[6]]++].s>0?'green':'red';
 		ctx.fillText(tmpk[rnd[6]], cvs.width/2+cvs.width/16*0.5, cvs.height/2);
-		ctx.fillStyle = cList[rnd[7]][l[rnd[7]]].s==0?'blue':cList[rnd[7]][l[rnd[7]]++].s>0?'green':'red';
+		ctx.fillStyle = nList[rnd[7]][l[rnd[7]]].s==0?'blue':nList[rnd[7]][l[rnd[7]]++].s>0?'green':'red';
 		ctx.fillText(tmpk[rnd[7]], cvs.width/2+cvs.width/16*1.5, cvs.height/2);
-		ctx.fillStyle = cList[rnd[8]][l[rnd[8]]].s==0?'blue':cList[rnd[8]][l[rnd[8]]++].s>0?'green':'red';
+		ctx.fillStyle = nList[rnd[8]][l[rnd[8]]].s==0?'blue':nList[rnd[8]][l[rnd[8]]++].s>0?'green':'red';
 		ctx.fillText(tmpk[rnd[8]], cvs.width/2-cvs.width/16*1.5, cvs.height/2+cvs.height/16);
-		ctx.fillStyle = cList[rnd[9]][l[rnd[9]]].s==0?'blue':cList[rnd[9]][l[rnd[9]]++].s>0?'green':'red';
+		ctx.fillStyle = nList[rnd[9]][l[rnd[9]]].s==0?'blue':nList[rnd[9]][l[rnd[9]]++].s>0?'green':'red';
 		ctx.fillText(tmpk[rnd[9]], cvs.width/2-cvs.width/16*0.5, cvs.height/2+cvs.height/16);
-		ctx.fillStyle = cList[rnd[10]][l[rnd[10]]].s==0?'blue':cList[rnd[10]][l[rnd[10]]++].s>0?'green':'red';
+		ctx.fillStyle = nList[rnd[10]][l[rnd[10]]].s==0?'blue':nList[rnd[10]][l[rnd[10]]++].s>0?'green':'red';
 		ctx.fillText(tmpk[rnd[10]], cvs.width/2+cvs.width/16*0.5, cvs.height/2+cvs.height/16);
-		ctx.fillStyle = cList[rnd[11]][l[rnd[11]]].s==0?'blue':cList[rnd[11]][l[rnd[11]]++].s>0?'green':'red';
+		ctx.fillStyle = nList[rnd[11]][l[rnd[11]]].s==0?'blue':nList[rnd[11]][l[rnd[11]]++].s>0?'green':'red';
 		ctx.fillText(tmpk[rnd[11]], cvs.width/2+cvs.width/16*1.5, cvs.height/2+cvs.height/16);
 	} else if(gm2&&time>tmp5) {
-		tdraw = [176, 217, 29, 553];
+		drawRange[0].min = 176;
+		drawRange[1].min = 217;
+		drawRange[2].min = 29
+		drawRange[3].min = 553;
 		gm2 = false;
 	}
 }
