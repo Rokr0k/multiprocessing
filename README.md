@@ -55,7 +55,7 @@ let crochet = [['b', 120, 1], ['n', 0, 10], ['n', 1, 11], ['n', 2, 12], ['n', 3,
 ```
 
 ## Gimmick Patterns
-High-end users may make some gimmick patterns in their levels.
+Users that are familiar with javascript may make some gimmick patterns in their levels.
 ```js
 function gimmick() { // Code before the graphics are completely drawn.
     // pass;
@@ -64,7 +64,7 @@ function lategimmick() { // Code after the graphics are completely drawn.
     // pass;
 }
 ```
-> You can draw above or below the original graphics, or just totally another game.
+> You can draw above or below the original graphics, or even make totally another game.
 
 For performance, notes that would probably not seen based on original graphics are not rendered. If you want to render them, modify following variable.
 ```js
