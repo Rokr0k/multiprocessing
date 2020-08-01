@@ -25,9 +25,9 @@ A rhythm game made with HTML5 and JavaScript.
 ## How to
 ### To set Audio File
 ```js
-let audioFile = "audio.ogg";
+let audioFile = "audio.***";
 ```
-> Plays "audio.ogg" as the game starts.
+> Plays "audio.\*\*\*" as the game starts.
 
 ### To set BPM,
 ```js
@@ -48,8 +48,10 @@ The offset works along the bpm. The default bpm is 60, so you can set it in seco
 ['n', 0, 10], ['n', 1, 11], ['n', 2, 12], ['n', 3, 13], ['n', 3, 14, 2]
 ```
 > Fish note on 10th beat, Ball note on 11th beat, Shoot note on 12th beat, Draw notes on 13th and 14th~16th beat.
+
+As a result,
 ```js
-let crochet = [['b', 120, 1], ['n', 0, 0], ['n', 1, 1], ['n', 3, 2], ['n', 2, 5]];
+let crochet = [['b', 120, 1], ['n', 0, 10], ['n', 1, 11], ['n', 2, 12], ['n', 3, 13], ['n', 3, 14, 2]];
 ```
 
 ## Gimmick Patterns
