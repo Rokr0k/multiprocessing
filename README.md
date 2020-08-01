@@ -25,9 +25,9 @@ A rhythm game made with HTML5 and JavaScript.
 ## How to
 ### To set Audio File
 ```js
-let audioFile = "audio.***";
+let audioFile = "audio.ogg";
 ```
-> Plays "audio.\*\*\*" as the game starts.
+> Plays "audio.ogg" as the game starts.
 
 ### To set BPM,
 ```js
