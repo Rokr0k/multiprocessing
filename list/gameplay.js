@@ -91,6 +91,8 @@ function draw() {
 	ctx.fillRect(0, 0, cvs.width / audio.duration * __time, 5);
 	ctx.fillStyle = 'yellow';
 	ctx.fillRect(0, 0, Math.min(cvs.width/2, cvs.width / audio.duration * __time), 5);
+
+	// Set drawRange
 	while(_drawRange[0].min<nList[0].length&&(nList[0][_drawRange[0].min].t - time) * cvs.width/4 + cvs.width/28*3+cvs.height/15<0) {
 		_drawRange[0].max = ++_drawRange[0].min;
 	}
@@ -118,7 +120,10 @@ function draw() {
 	for(var i=0; i<4; i++) {
 		drawRange[i] = {..._drawRange[i]};
 	}
+
+	// Call Gimmick
 	gimmick();
+
 	ctx.lineWidth = cvs.width/200;
 	ctx.font = cvs.height/20+'px sans-serif';
 	ctx.textAlign = 'center';
@@ -133,6 +138,8 @@ function draw() {
 		ctx.fillStyle = 'dodgerblue';
 		ctx.fillText('K', cvs.width/2+50, cvs.height/2+50);
 	}
+
+	// Draw Fish Part
 	ctx.beginPath();
 	ctx.fillStyle = '#fff3';
 	ctx.arc(cvs.width/28*3, cvs.height/4, cvs.height/15, 0, Math.PI*2);
@@ -155,9 +162,12 @@ function draw() {
 		ctx.arc((nList[0][i].t - time) * cvs.width/4 + cvs.width/28*3, cvs.height/4, cvs.height/15, Math.PI/2*3, Math.PI/2);
 		ctx.stroke();
 		ctx.closePath();
-		if(__$__$_&&nList[0][i].s==0&&nList[0][i].t<__time)
+		if(__$__$_&&nList[0][i].s==0&&nList[0][i].t<__time) {
 			keydown({keyCode: 70});
+		}
 	}
+
+	// Draw Ball Part
 	for(var i=drawRange[1].min; i<drawRange[1].max; i++) {
 		if(nList[1][i].s==0&&nList[1][i].t-__time<-0.1) {
 			nList[1][i].s = -1;
@@ -165,14 +175,18 @@ function draw() {
 		}
 		ctx.beginPath();
 		ctx.fillStyle = nList[1][i].s==0?'black':nList[1][i].s>0?'green':'red';
-		if((nList[1][i].t - time)*cvs.width/4>0)
+		if((nList[1][i].t - time)*cvs.width/4>0) {
 			ctx.arc(cvs.width/4*3+(nList[1][i].t - time)*cvs.width/4, Math.pow((nList[1][i].t - time)*cvs.width/4-cvs.width/4, 2)/(cvs.width*cvs.width/16)*cvs.height/2-cvs.height/40, cvs.height/40, 0, Math.PI*2);
-		else
+		}
+		else {
 			ctx.arc(cvs.width/4*3+(nList[1][i].t - time)*cvs.width/4, Math.pow((nList[1][i].t - time)*cvs.width/4+cvs.width/4, 2)/(cvs.width*cvs.width/16)*cvs.height/2-cvs.height/40, cvs.height/40, 0, Math.PI*2);
+		}
 		ctx.fill();
 		if(__$__$_&&nList[1][i].s==0&&nList[1][i].t<__time)
 			keydown({keyCode: 74});
 	}
+
+	// Draw Shoot Part
 	for(var i=drawRange[2].min; i<drawRange[2].max; i++) {
 		if(nList[2][i].s==0&&nList[2][i].t-__time<-0.1) {
 			nList[2][i].s = -1;
@@ -183,7 +197,8 @@ function draw() {
 		if(nList[2][i].t>time) {
 			ctx.arc(cvs.width/4-(nList[2][i].t - time)*(nList[2][i].t - time)*cvs.width/20, cvs.height/4*3, cvs.height/15, 0, Math.PI*2);
 			ctx.fill();
-		} else {
+		}
+		else {
 			ctx.arc(cvs.width/4, cvs.height/4*3, cvs.height/15+(time - nList[2][i].t)*cvs.width/2, 0, Math.PI*2);
 			ctx.stroke();
 			ctx.closePath();
@@ -202,11 +217,14 @@ function draw() {
 	ctx.lineTo(cvs.width/4+cvs.height/8, cvs.height/4*3);
 	ctx.stroke();
 	ctx.closePath();
+
+	// Draw Draw Part (lol)
 	for(var i=drawRange[3].min; i<drawRange[3].max; i++) {
 		if(nList[3][i].s==0&&nList[3][i].t-__time<-0.1) {
 			nList[3][i].s = -1;
 			result[3][1]++;
 		}
+		// If the note is long
 		if(nList[3][i].b) {
 			ctx.strokeStyle = 'black';
 			ctx.beginPath();
@@ -220,7 +238,9 @@ function draw() {
 			ctx.lineTo(Math.max(cvs.width/2, cvs.width/10*7+Math.min(0, nList[3][i].t+nList[3][i].d-time)*cvs.width/4), cvs.height/10*9);
 			ctx.stroke();
 			ctx.closePath();
-		} else {
+		}
+		// If the note is short
+		else {
 			ctx.strokeStyle = nList[3][i].s==0?'black':nList[3][i].s>0?'green':'red';
 			ctx.beginPath();
 			ctx.moveTo(cvs.width/10*7+(nList[3][i].t-time)*cvs.width/4, cvs.height/10*9);
@@ -237,6 +257,8 @@ function draw() {
 	ctx.lineTo(cvs.width/10*7, cvs.height);
 	ctx.stroke();
 	ctx.closePath();
+
+	// Show Result
 	if(last<time-0.1) {
 		ctx.fillStyle = 'green';
 		ctx.textAlign = 'right';
@@ -248,20 +270,21 @@ function draw() {
 		ctx.fillText(result[3][0]+' ', cvs.width/4*3, cvs.height/2);
 		ctx.fillStyle = 'red';
 		ctx.textAlign = 'left';
+		ctx.fillText(' '+result[2][1], cvs.width/4, cvs.height/2);
+		ctx.fillText(' '+result[3][1], cvs.width/4*3, cvs.height/2);
 		ctx.textBaseline = 'bottom';
 		ctx.fillText(' '+result[0][1], cvs.width/4, cvs.height/2);
 		ctx.fillText(' '+result[1][1], cvs.width/4*3, cvs.height/2);
-		ctx.textBaseline = 'top';
-		ctx.fillText(' '+result[2][1], cvs.width/4, cvs.height/2);
-		ctx.fillText(' '+result[3][1], cvs.width/4*3, cvs.height/2);
 	}
+
+	// Call LateGimmick
 	lategimmick();
 	requestAnimationFrame(draw);
 }
 function keydown(e) {
 	var time = audio.currentTime;
 	switch(e.keyCode) {
-	case 70:
+	case 70:	// F
 		for(var i=0; i<nList[0].length; i++)
 			if(nList[0][i].s==0&&Math.abs(nList[0][i].t-time)<0.1) {
 				nList[0][i].s = 1;
@@ -269,7 +292,7 @@ function keydown(e) {
 				break;
 			}
 		break;
-	case 74:
+	case 74:	// J
 		for(var i=0; i<nList[1].length; i++)
 			if(nList[1][i].s==0&&Math.abs(nList[1][i].t-time)<0.1) {
 				nList[1][i].s = 1;
@@ -277,7 +300,7 @@ function keydown(e) {
 				break;
 			}
 		break;
-	case 68:
+	case 68:	// D
 		for(var i=0; i<nList[2].length; i++)
 			if(nList[2][i].s==0&&Math.abs(nList[2][i].t-time)<0.1) {
 				nList[2][i].s = 1;
@@ -285,7 +308,7 @@ function keydown(e) {
 				break;
 			}
 		break;
-	case 75:
+	case 75:	// K
 		for(var i=0; i<nList[3].length; i++)
 			if(nList[3][i].s==0&&Math.abs(nList[3][i].t-time)<0.1) {
 				nList[3][i].s = 1;
@@ -293,7 +316,7 @@ function keydown(e) {
 				break;
 			}
 		break;
-	case 32:
+/*	case 32:	// Debug Mode
 		if(audio.paused)
 			audio.play();
 		else
@@ -304,11 +327,11 @@ function keydown(e) {
 		break;
 	case 39:
 		audio.currentTime += 10;
-		break;
+		break;*/
 	}
 }
 function keyup(e) {
-	if(e.keyCode==75) {
+	if(e.keyCode==75) {		// K
 		var time = audio.currentTime;
 		for(var i=0; i<nList[3].length; i++) {
 			if(nList[3][i].b&&nList[3][i].s==1&&nList[3][i].t<time-0.1&&nList[3][i].t+nList[3][i].d>time+0.1) {
