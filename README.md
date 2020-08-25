@@ -73,7 +73,7 @@ drawRange[0].max = nList[0].length;
 ```
 > It would make every notes in Fish part rendered, may occur lags.
 
-You can refer to the gameplay.js file as you make gimmick patterns, but you may not modify it for compability. ~~I appologize because I didn't make enough comments and the fish image is in base64 code :(~~
+You can refer to the gameplay.js file as you make gimmick patterns, but you may not modify it for compability. ~~I appologize because I didn't make enough comments :(~~
 
 Soon I will add comments to gameplay.js file, so please wait.
 
