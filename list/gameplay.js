@@ -66,7 +66,7 @@ function init() {
 	});
 }
 let fish = new Image();
-fish.src = 'fish.png';
+fish.src = "https://01320nabi.github.io/multiprocessing/list/fish.png";
 let time;
 let _drawRange = [{min: 0, max: 0}, {min: 0, max: 0}, {min: 0, max: 0}, {min: 0, max: 0}];
 let drawRange = [];
