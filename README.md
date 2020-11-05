@@ -76,8 +76,3 @@ drawRange[0].max = nList[0].length;
 You can refer to the gameplay.js file as you make gimmick patterns, but you may not modify it for compability. ~~I appologize because I didn't make enough comments :(~~
 
 Soon I will add comments to gameplay.js file, so please wait.
-
-# Song Recommendation
-I need free songs that can be used in a game. And it is so hard to find.
-Please give me if you know some.
-[Recommend](https://forms.gle/gfuV5SA6aCqFhMpTA)
