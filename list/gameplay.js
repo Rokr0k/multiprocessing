@@ -290,6 +290,7 @@ function keydown(e) {
 	var time = audio.currentTime;
 	switch(e.keyCode) {
 	case 70:	// F
+	case 85:
 		for(var i=0; i<nList[0].length; i++)
 			if(nList[0][i].s==0&&Math.abs(nList[0][i].t-time)<0.1) {
 				nList[0][i].s = 1;
@@ -298,6 +299,7 @@ function keydown(e) {
 			}
 		break;
 	case 74:	// J
+	case 82:
 		for(var i=0; i<nList[1].length; i++)
 			if(nList[1][i].s==0&&Math.abs(nList[1][i].t-time)<0.1) {
 				nList[1][i].s = 1;
@@ -306,6 +308,7 @@ function keydown(e) {
 			}
 		break;
 	case 68:	// D
+	case 73:
 		for(var i=0; i<nList[2].length; i++)
 			if(nList[2][i].s==0&&Math.abs(nList[2][i].t-time)<0.1) {
 				nList[2][i].s = 1;
@@ -314,13 +317,14 @@ function keydown(e) {
 			}
 		break;
 	case 75:	// K
+	case 69:
 		for(var i=0; i<nList[3].length; i++)
 			if(nList[3][i].s==0&&Math.abs(nList[3][i].t-time)<0.1) {
 				nList[3][i].s = 1;
 				result[3][0]++;
 				break;
 			}
-		break;
+		break;/*/
 	case 32:	// Debug Mode
 		if(audio.paused)
 			audio.play();
@@ -332,7 +336,7 @@ function keydown(e) {
 		break;
 	case 39:
 		audio.currentTime += 10;
-		break;
+		break;/*/
 	}
 }
 function keyup(e) {
