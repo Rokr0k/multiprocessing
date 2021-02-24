@@ -15,7 +15,7 @@ A rhythm game made with HTML5 and JavaScript.
 > - You have to press D when the target is perfectly aimmed.
 
 ## Draw Part
-> - I made it but I actually don't know what it is.
+> - I made it but I actually don"t know what it is.
 > - You have to press K when notes are passing the long line. (Long note available)
 
 # Level Editing
@@ -31,13 +31,13 @@ let audioFile = "audio.ogg";
 
 ### To set BPM,
 ```js
-['b', 120, 1]
+{type:"b", bpm:120, offset:1}
 ```
 > BPM: 120, Offset: 1s
 
 If you want to change it again,
 ```js
-['b', 120, 1], ..., ['b', 180, 1]
+{type:"b", bpm:120, offset:1}, ..., {type:"b", bpm:180, offset:1}
 ```
 > BPM: 180, Offset: 1.5s (from the beginning of the audio)
 
@@ -45,13 +45,20 @@ The offset works along the bpm. The default bpm is 60, so you can set it in seco
 
 ### To add a note,
 ```js
-['n', 0, 10], ['n', 1, 11], ['n', 2, 12], ['n', 3, 13], ['n', 3, 14, 2]
+{type:"n", kind:0, pos:10}, {type:"n", kind:1, pos:11}, {type:"n", kind:2, pos:12}, {type:"n", kind:3, pos:13}, {type:"n", kind:3, pos:14, dur:2}
 ```
 > Fish note on 10th beat, Ball note on 11th beat, Shoot note on 12th beat, Draw notes on 13th and 14th~16th beat.
 
 As a result,
 ```js
-let crochet = [['b', 120, 1], ['n', 0, 10], ['n', 1, 11], ['n', 2, 12], ['n', 3, 13], ['n', 3, 14, 2]];
+let crochet = [
+    {type:"b", 120, 1},
+    {type:"n", kind:0, pos:10},
+    {type:"n", kind:1, pos:11},
+    {type:"n", kind:2, pos:12},
+    {type:"n", kind:3, pos:13},
+    {type:"n", kind:3, pos:14, dur:2}
+];
 ```
 
 ## Gimmick Patterns

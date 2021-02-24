@@ -30,21 +30,21 @@ function init() {
 	document.body.replaceChild(cvs, document.getElementById('startup'));
 	cvs.requestFullscreen();
 	ctx = cvs.getContext('2d');
-	var bpm = 60, offset = 0;
-	for(var i=0; i<crochet.length; i++) {
-		switch(crochet[i][0]) {
+	let bpm = 60, offset = 0;
+	for(let i=0; i<crochet.length; i++) {
+		switch(crochet[i].type) {
 		case 'b':
-			offset += crochet[i][2]/bpm*60;
-			bpm = crochet[i][1];
+			offset += crochet[i].offset/bpm*60;
+			bpm = crochet[i].bpm;
 			break;
 		case 'n':
-			nList[crochet[i][1]].push({t:crochet[i][2]/bpm*60+offset, s:0});
-			last = Math.max(last, nList[crochet[i][1]][nList[crochet[i][1]].length-1].t);
-			if(crochet[i][1]==3) {
+			nList[crochet[i].kind].push({t:crochet[i].pos/bpm*60+offset, s:0});
+			last = Math.max(last, nList[crochet[i].kind][nList[crochet[i].kind].length-1].t);
+			if(crochet[i].kind==3) {
 				nList[3][nList[3].length-1].b = false;
 				nList[3][nList[3].length-1].d = 0;
-				if(crochet[i].length>3) {
-					nList[3][nList[3].length-1].d = crochet[i][3]/bpm*60;
+				if(crochet[i].dur) {
+					nList[3][nList[3].length-1].d = crochet[i].dur/bpm*60;
 					nList[3][nList[3].length-1].b = true;
 					last = Math.max(last, nList[3][nList[3].length-1].t+nList[3][nList[3].length-1].d);
 				}
@@ -72,7 +72,7 @@ let _drawRange = [{min: 0, max: 0}, {min: 0, max: 0}, {min: 0, max: 0}, {min: 0,
 let drawRange = [];
 function draw() {
 	time = audio.currentTime;
-	var __time = audio.currentTime;
+	let __time = audio.currentTime;
 	cvs.width = window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;
 	cvs.height = window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight;
 	ctx.lineWidth = cvs.width/200;
@@ -117,7 +117,7 @@ function draw() {
 	while(_drawRange[3].max<nList[3].length&&cvs.width/10*7+(nList[3][_drawRange[3].max].t-time)*cvs.width/4<cvs.width) {
 		_drawRange[3].max++;
 	}
-	for(var i=0; i<4; i++) {
+	for(let i=0; i<4; i++) {
 		drawRange[i] = {..._drawRange[i]};
 	}
 
@@ -144,7 +144,7 @@ function draw() {
 	ctx.fillStyle = '#fff3';
 	ctx.arc(cvs.width/28*3, cvs.height/4, cvs.height/15, 0, Math.PI*2);
 	ctx.fill();
-	for(var i=drawRange[0].min; i<drawRange[0].max; i++) {
+	for(let i=drawRange[0].min; i<drawRange[0].max; i++) {
 		if(nList[0][i].s==0&&nList[0][i].t-__time<-0.1) {
 			nList[0][i].s = -1;
 			result[0][1]++;
@@ -156,7 +156,7 @@ function draw() {
 		ctx.closePath();
 	}
 	ctx.drawImage(fish, cvs.width/35*2, cvs.height/5, cvs.width/10, cvs.height/10);
-	for(var i=drawRange[0].min; i<drawRange[0].max; i++) {
+	for(let i=drawRange[0].min; i<drawRange[0].max; i++) {
 		ctx.beginPath();
 		ctx.strokeStyle = nList[0][i].s==0?'white':nList[0][i].s>0?'green':'red';
 		ctx.arc((nList[0][i].t - time) * cvs.width/4 + cvs.width/28*3, cvs.height/4, cvs.height/15, Math.PI/2*3, Math.PI/2);
@@ -168,7 +168,7 @@ function draw() {
 	}
 
 	// Draw Ball Part
-	for(var i=drawRange[1].min; i<drawRange[1].max; i++) {
+	for(let i=drawRange[1].min; i<drawRange[1].max; i++) {
 		if(nList[1][i].s==0&&nList[1][i].t-__time<-0.1) {
 			nList[1][i].s = -1;
 			result[1][1]++;
@@ -187,7 +187,7 @@ function draw() {
 	}
 
 	// Draw Shoot Part
-	for(var i=drawRange[2].min; i<drawRange[2].max; i++) {
+	for(let i=drawRange[2].min; i<drawRange[2].max; i++) {
 		if(nList[2][i].s==0&&nList[2][i].t-__time<-0.1) {
 			nList[2][i].s = -1;
 			result[2][1]++;
@@ -219,7 +219,7 @@ function draw() {
 	ctx.closePath();
 
 	// Draw Draw Part (lol)
-	for(var i=drawRange[3].min; i<drawRange[3].max; i++) {
+	for(let i=drawRange[3].min; i<drawRange[3].max; i++) {
 		if(nList[3][i].s==0&&nList[3][i].t-__time<-0.1) {
 			nList[3][i].s = -1;
 			result[3][1]++;
@@ -248,8 +248,9 @@ function draw() {
 			ctx.stroke();
 			ctx.closePath();
 		}
-		if(__$__$_&&nList[3][i].s==0&&nList[3][i].t<__time)
+		if(__$__$_&&nList[3][i].s==0&&nList[3][i].t<__time) {
 			keydown({keyCode: 75});
+		}
 	}
 	ctx.strokeStyle = 'black';
 	ctx.beginPath();
@@ -287,11 +288,11 @@ function draw() {
 }
 let finished = false;
 function keydown(e) {
-	var time = audio.currentTime;
+	let time = audio.currentTime;
 	switch(e.keyCode) {
 	case 70:	// F
 	case 85:
-		for(var i=0; i<nList[0].length; i++)
+		for(let i=0; i<nList[0].length; i++)
 			if(nList[0][i].s==0&&Math.abs(nList[0][i].t-time)<0.1) {
 				nList[0][i].s = 1;
 				result[0][0]++;
@@ -300,7 +301,7 @@ function keydown(e) {
 		break;
 	case 74:	// J
 	case 82:
-		for(var i=0; i<nList[1].length; i++)
+		for(let i=0; i<nList[1].length; i++)
 			if(nList[1][i].s==0&&Math.abs(nList[1][i].t-time)<0.1) {
 				nList[1][i].s = 1;
 				result[1][0]++;
@@ -309,7 +310,7 @@ function keydown(e) {
 		break;
 	case 68:	// D
 	case 73:
-		for(var i=0; i<nList[2].length; i++)
+		for(let i=0; i<nList[2].length; i++)
 			if(nList[2][i].s==0&&Math.abs(nList[2][i].t-time)<0.1) {
 				nList[2][i].s = 1;
 				result[2][0]++;
@@ -318,7 +319,7 @@ function keydown(e) {
 		break;
 	case 75:	// K
 	case 69:
-		for(var i=0; i<nList[3].length; i++)
+		for(let i=0; i<nList[3].length; i++)
 			if(nList[3][i].s==0&&Math.abs(nList[3][i].t-time)<0.1) {
 				nList[3][i].s = 1;
 				result[3][0]++;
@@ -341,8 +342,8 @@ function keydown(e) {
 }
 function keyup(e) {
 	if(e.keyCode==75) {		// K
-		var time = audio.currentTime;
-		for(var i=0; i<nList[3].length; i++) {
+		lettime = audio.currentTime;
+		for(let i=0; i<nList[3].length; i++) {
 			if(nList[3][i].b&&nList[3][i].s==1&&nList[3][i].t<time-0.1&&nList[3][i].t+nList[3][i].d>time+0.1) {
 				nList[3][i].s = -1;
 				result[3][0]--;
