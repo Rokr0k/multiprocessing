@@ -5,33 +5,586 @@
 		<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
 		<link rel='shortcut icon' href='./../favicon.png'/>
 		<link rel='icon' size='192x192' href='./../favicon_192.png'/>
+		<link rel='stylesheet' href='./style.css'/>
 		<title>M1LLI0N PP</title>
-		<style>
-			html, body {
-				width: 100%;
-				height: 100%;
-				overflow: hidden;
-				margin: 0px;
-				padding: 0px;
-			}
-			canvas {
-				cursor: none;
-			}
-			* {
-				user-select: none;
-			}
-		</style>
 	</head>
 	<body>
 		<p id='startup'><button id='play' disabled='true'>Play</button>Press P to Start, A for autoplay</p>
 	</body>
 	<script>
-		let crochet = [];
+		let bpms = [234, 215, 198, 182, 167, 154, 141, 130, 125, 130, 135, 138, 142, 148, 152, 156, 160, 166, 172, 175, 180, 185, 192, 200, 212, 220, 234]
+		let crochet = [
+			{type: "b", bpm: bpms[0], offset: 2.82},
+			{type: "n", kind: 1, pos: 0},
+			{type: "n", kind: 1, pos: 1.5},
+			{type: "n", kind: 1, pos: 3},
+			{type: "n", kind: 1, pos: 4.5},
+			{type: "n", kind: 1, pos: 6},
+			{type: "n", kind: 1, pos: 7},
+			{type: "n", kind: 1, pos: 8},
+			{type: "n", kind: 1, pos: 9.5},
+			{type: "n", kind: 1, pos: 11},
+			{type: "n", kind: 1, pos: 12.5},
+			{type: "n", kind: 1, pos: 13.5},
+			{type: "n", kind: 1, pos: 14},
+			{type: "n", kind: 1, pos: 14.5},
+			{type: "n", kind: 1, pos: 15},
+			{type: "n", kind: 1, pos: 16},
+			{type: "n", kind: 1, pos: 17.5},
+			{type: "n", kind: 1, pos: 19},
+			{type: "n", kind: 1, pos: 20.5},
+			{type: "n", kind: 1, pos: 22},
+			{type: "n", kind: 1, pos: 23},
+			{type: "n", kind: 1, pos: 24},
+			{type: "n", kind: 1, pos: 25.5},
+			{type: "n", kind: 1, pos: 27},
+			{type: "n", kind: 1, pos: 28.5},
+			{type: "n", kind: 1, pos: 29.5},
+			{type: "n", kind: 1, pos: 30},
+			{type: "n", kind: 1, pos: 30.5},
+			{type: "n", kind: 1, pos: 31},
+			{type: "n", kind: 3, pos: 32}, // Ambient Glitch
+			{type: "n", kind: 3, pos: 33.5},
+			{type: "n", kind: 3, pos: 35},
+			{type: "n", kind: 3, pos: 36.5},
+			{type: "n", kind: 3, pos: 38, dur: 8},
+			{type: "n", kind: 3, pos: 47},
+			{type: "n", kind: 3, pos: 47.5},
+			{type: "n", kind: 3, pos: 48},
+			{type: "n", kind: 3, pos: 49.5},
+			{type: "n", kind: 3, pos: 51},
+			{type: "n", kind: 3, pos: 52.5},
+			{type: "n", kind: 3, pos: 54, dur: 9},
+			{type: "n", kind: 1, pos: 62},
+			{type: "n", kind: 1, pos: 63},
+			{type: "n", kind: 2, pos: 64}, // Ambient / Artcore
+			{type: "n", kind: 1, pos: 65.5}, {type: "n", kind: 2, pos: 65.5},
+			{type: "n", kind: 2, pos: 67},
+			{type: "n", kind: 1, pos: 68.5}, {type: "n", kind: 2, pos: 68.5},
+			{type: "n", kind: 2, pos: 70}, {type: "n", kind: 3, pos: 70, dur: 8},
+			{type: "n", kind: 3, pos: 79},
+			{type: "n", kind: 3, pos: 79+1/3},
+			{type: "n", kind: 3, pos: 79+2/3},
+			{type: "n", kind: 2, pos: 80},
+			{type: "n", kind: 2, pos: 81.5}, {type: "n", kind: 3, pos: 81.5},
+			{type: "n", kind: 2, pos: 83},
+			{type: "n", kind: 2, pos: 84.5},
+			{type: "n", kind: 2, pos: 86}, {type: "n", kind: 3, pos: 86, dur: 9},
+			{type: "n", kind: 2, pos: 96}, {type: "n", kind: 3, pos: 96},
+			{type: "n", kind: 2, pos: 97.5}, {type: "n", kind: 3, pos: 97.5},
+			{type: "n", kind: 2, pos: 99}, {type: "n", kind: 3, pos: 99},
+			{type: "n", kind: 2, pos: 100.5}, {type: "n", kind: 3, pos: 100.5},
+			{type: "n", kind: 2, pos: 102}, {type: "n", kind: 3, pos: 102, dur: 8},
+			{type: "n", kind: 1, pos: 111},
+			{type: "n", kind: 2, pos: 112}, {type: "n", kind: 3, pos: 112},
+			{type: "n", kind: 2, pos: 113.5},
+			{type: "n", kind: 2, pos: 115}, {type: "n", kind: 3, pos: 115},
+			{type: "n", kind: 2, pos: 116.5},
+			{type: "n", kind: 2, pos: 118}, {type: "n", kind: 3, pos: 118, dur: 8},
+			{type: "n", kind: 3, pos: 127, dur: 7},
+			{type: "n", kind: 0, pos: 134},
+			{type: "n", kind: 0, pos: 135},
+			{type: "n", kind: 2, pos: 136},
+			{type: "n", kind: 2, pos: 137},
+			{type: "n", kind: 2, pos: 138.5},
+			{type: "n", kind: 2, pos: 139.5},
+			{type: "n", kind: 2, pos: 144},
+			{type: "n", kind: 2, pos: 145},
+			{type: "n", kind: 2, pos: 146.5},
+			{type: "n", kind: 2, pos: 147.5},
+			{type: "n", kind: 2, pos: 148.5},
+			{type: "n", kind: 2, pos: 152},
+			{type: "n", kind: 2, pos: 153},
+			{type: "n", kind: 2, pos: 154.5},
+			{type: "n", kind: 2, pos: 155.5},
+			{type: "n", kind: 2, pos: 161},
+			{type: "n", kind: 2, pos: 162.5},
+			{type: "n", kind: 2, pos: 164},
+			{type: "n", kind: 2, pos: 165.5},
+			{type: "n", kind: 2, pos: 168}, // Speedcore / Breakcore
+			{type: "n", kind: 2, pos: 169},
+			{type: "n", kind: 2, pos: 170.5},
+			{type: "n", kind: 2, pos: 171.5},
+			{type: "n", kind: 2, pos: 176},
+			{type: "n", kind: 2, pos: 177},
+			{type: "n", kind: 2, pos: 178.5},
+			{type: "n", kind: 2, pos: 179.5},
+			{type: "n", kind: 2, pos: 180.5},
+			{type: "n", kind: 2, pos: 184},
+			{type: "n", kind: 2, pos: 185.5},
+			{type: "n", kind: 2, pos: 187},
+			{type: "n", kind: 2, pos: 188.5},
+			{type: "n", kind: 2, pos: 190},
+			{type: "n", kind: 2, pos: 191.5},
+			{type: "n", kind: 2, pos: 193},
+			{type: "n", kind: 2, pos: 194.5},
+			{type: "n", kind: 0, pos: 200}, {type: "n", kind: 1, pos: 200}, // Hardcore
+			{type: "n", kind: 1, pos: 201},
+			{type: "n", kind: 0, pos: 201.5},
+			{type: "n", kind: 1, pos: 202},
+			{type: "n", kind: 0, pos: 203}, {type: "n", kind: 1, pos: 203},
+			{type: "n", kind: 1, pos: 204},
+			{type: "n", kind: 0, pos: 204.5},
+			{type: "n", kind: 1, pos: 205},
+			{type: "n", kind: 0, pos: 206}, {type: "n", kind: 1, pos: 206},
+			{type: "n", kind: 0, pos: 207}, {type: "n", kind: 1, pos: 207},
+			{type: "n", kind: 0, pos: 208}, {type: "n", kind: 1, pos: 208},
+			{type: "n", kind: 1, pos: 209},
+			{type: "n", kind: 0, pos: 209.5},
+			{type: "n", kind: 1, pos: 210},
+			{type: "n", kind: 0, pos: 211}, {type: "n", kind: 1, pos: 211},
+			{type: "n", kind: 1, pos: 212},
+			{type: "n", kind: 0, pos: 212.5},
+			{type: "n", kind: 1, pos: 213},
+			{type: "n", kind: 0, pos: 213.5},
+			{type: "n", kind: 0, pos: 214}, {type: "n", kind: 1, pos: 214},
+			{type: "n", kind: 0, pos: 214.5},
+			{type: "n", kind: 0, pos: 215},
+			{type: "n", kind: 2, pos: 216},  // Frenchcore / Gabber
+			{type: "n", kind: 2, pos: 217},
+			{type: "n", kind: 2, pos: 218}, {type: "n", kind: 1, pos: 218},
+			{type: "n", kind: 2, pos: 219}, {type: "n", kind: 1, pos: 219},
+			{type: "n", kind: 2, pos: 220}, {type: "n", kind: 1, pos: 220},
+			{type: "n", kind: 2, pos: 221}, {type: "n", kind: 1, pos: 221},
+			{type: "n", kind: 2, pos: 222}, {type: "n", kind: 1, pos: 222},
+			{type: "n", kind: 2, pos: 223}, {type: "n", kind: 1, pos: 223},
+			{type: "n", kind: 2, pos: 224}, {type: "n", kind: 1, pos: 224},
+			{type: "n", kind: 2, pos: 224.5}, {type: "n", kind: 1, pos: 224.5},
+			{type: "n", kind: 2, pos: 225}, {type: "n", kind: 1, pos: 225},
+			{type: "n", kind: 2, pos: 226}, {type: "n", kind: 1, pos: 226},
+			{type: "n", kind: 2, pos: 227}, {type: "n", kind: 1, pos: 227},
+			{type: "n", kind: 2, pos: 228}, {type: "n", kind: 1, pos: 228},
+			{type: "n", kind: 2, pos: 229}, {type: "n", kind: 1, pos: 229},
+			{type: "n", kind: 2, pos: 230}, {type: "n", kind: 1, pos: 230},
+			{type: "n", kind: 2, pos: 230.5}, {type: "n", kind: 1, pos: 230.5},
+			{type: "n", kind: 2, pos: 231.5},
+			{type: "n", kind: 2, pos: 231.75},
+			{type: "n", kind: 2, pos: 232}, // Hardcore
+			{type: "n", kind: 1, pos: 233},
+			{type: "n", kind: 1, pos: 234}, {type: "n", kind: 0, pos: 234},
+			{type: "n", kind: 1, pos: 235}, {type: "n", kind: 0, pos: 235},
+			{type: "n", kind: 1, pos: 236}, {type: "n", kind: 0, pos: 236},
+			{type: "n", kind: 1, pos: 237}, {type: "n", kind: 0, pos: 237},
+			{type: "n", kind: 1, pos: 238}, {type: "n", kind: 0, pos: 238},
+			{type: "n", kind: 1, pos: 239}, {type: "n", kind: 0, pos: 239},
+			{type: "n", kind: 1, pos: 240}, {type: "n", kind: 3, pos: 240},
+			{type: "n", kind: 1, pos: 241}, {type: "n", kind: 3, pos: 241},
+			{type: "n", kind: 1, pos: 242}, {type: "n", kind: 0, pos: 242},
+			{type: "n", kind: 1, pos: 243}, {type: "n", kind: 0, pos: 243},
+			{type: "n", kind: 1, pos: 244}, {type: "n", kind: 0, pos: 244},
+			{type: "n", kind: 1, pos: 245}, {type: "n", kind: 0, pos: 245},
+			{type: "n", kind: 1, pos: 246}, {type: "n", kind: 3, pos: 246, dur: 1.5},
+			{type: "n", kind: 2, pos: 248}, // Drum & Bass
+			{type: "n", kind: 1, pos: 249},
+			{type: "n", kind: 2, pos: 250.5},
+			{type: "n", kind: 1, pos: 251},
+			{type: "n", kind: 2, pos: 252},
+			{type: "n", kind: 1, pos: 253},
+			{type: "n", kind: 2, pos: 254.5},
+			{type: "n", kind: 1, pos: 255},
+			{type: "n", kind: 2, pos: 256},
+			{type: "n", kind: 1, pos: 257},
+			{type: "n", kind: 2, pos: 258.5},
+			{type: "n", kind: 1, pos: 259},
+			{type: "n", kind: 2, pos: 260},
+			{type: "n", kind: 1, pos: 261},
+			{type: "n", kind: 3, pos: 262, dur: 2},
+			{type: "n", kind: 0, pos: 264}, {type: "n", kind: 1, pos: 264}, // Hardcore
+			{type: "n", kind: 1, pos: 264.5},
+			{type: "n", kind: 1, pos: 265},
+			{type: "n", kind: 0, pos: 265.5},
+			{type: "n", kind: 1, pos: 266},
+			{type: "n", kind: 0, pos: 267}, {type: "n", kind: 1, pos: 267},
+			{type: "n", kind: 1, pos: 268},
+			{type: "n", kind: 0, pos: 268.5},
+			{type: "n", kind: 1, pos: 269},
+			{type: "n", kind: 0, pos: 270}, {type: "n", kind: 1, pos: 270},
+			{type: "n", kind: 0, pos: 271}, {type: "n", kind: 1, pos: 271},
+			{type: "n", kind: 0, pos: 272}, {type: "n", kind: 1, pos: 272},
+			{type: "n", kind: 1, pos: 273},
+			{type: "n", kind: 0, pos: 273.5},
+			{type: "n", kind: 1, pos: 274},
+			{type: "n", kind: 0, pos: 275}, {type: "n", kind: 1, pos: 275},
+			{type: "n", kind: 1, pos: 276},
+			{type: "n", kind: 0, pos: 276.5},
+			{type: "n", kind: 1, pos: 277},
+			{type: "n", kind: 0, pos: 277.5},
+			{type: "n", kind: 0, pos: 278}, {type: "n", kind: 1, pos: 278},
+			{type: "n", kind: 0, pos: 278.5},
+			{type: "n", kind: 0, pos: 279},
+			{type: "n", kind: 2, pos: 280},  // Frenchcore / Gabber
+			{type: "n", kind: 2, pos: 281},
+			{type: "n", kind: 1, pos: 282}, {type: "n", kind: 2, pos: 282},
+			{type: "n", kind: 1, pos: 283}, {type: "n", kind: 2, pos: 283},
+			{type: "n", kind: 1, pos: 284}, {type: "n", kind: 2, pos: 284},
+			{type: "n", kind: 1, pos: 285}, {type: "n", kind: 2, pos: 285},
+			{type: "n", kind: 1, pos: 286}, {type: "n", kind: 2, pos: 286},
+			{type: "n", kind: 1, pos: 286.5},
+			{type: "n", kind: 1, pos: 287}, {type: "n", kind: 2, pos: 287},
+			{type: "n", kind: 1, pos: 288}, {type: "n", kind: 2, pos: 288},
+			{type: "n", kind: 1, pos: 288.25},
+			{type: "n", kind: 1, pos: 288.75},
+			{type: "n", kind: 1, pos: 289}, {type: "n", kind: 2, pos: 289},
+			{type: "n", kind: 1, pos: 290}, {type: "n", kind: 2, pos: 290},
+			{type: "n", kind: 1, pos: 291}, {type: "n", kind: 2, pos: 291},
+			{type: "n", kind: 1, pos: 292}, {type: "n", kind: 2, pos: 292},
+			{type: "n", kind: 1, pos: 292.5},
+			{type: "n", kind: 1, pos: 293}, {type: "n", kind: 2, pos: 293},
+			{type: "n", kind: 1, pos: 294}, {type: "n", kind: 2, pos: 294},
+			{type: "n", kind: 1, pos: 294.5}, {type: "n", kind: 2, pos: 294.5},
+			{type: "n", kind: 2, pos: 295.5},
+			{type: "n", kind: 2, pos: 295.75},
+			{type: "n", kind: 2, pos: 296}, // Hardcore
+			{type: "n", kind: 1, pos: 297},
+			{type: "n", kind: 1, pos: 298}, {type: "n", kind: 0, pos: 298},
+			{type: "n", kind: 1, pos: 299}, {type: "n", kind: 0, pos: 299},
+			{type: "n", kind: 1, pos: 300}, {type: "n", kind: 0, pos: 300},
+			{type: "n", kind: 1, pos: 301}, {type: "n", kind: 0, pos: 301},
+			{type: "n", kind: 1, pos: 302}, {type: "n", kind: 0, pos: 302},
+			{type: "n", kind: 1, pos: 303}, {type: "n", kind: 0, pos: 303},
+			{type: "n", kind: 1, pos: 304}, {type: "n", kind: 3, pos: 304},
+			{type: "n", kind: 1, pos: 305}, {type: "n", kind: 3, pos: 305},
+			{type: "n", kind: 1, pos: 306}, {type: "n", kind: 0, pos: 306},
+			{type: "n", kind: 1, pos: 307}, {type: "n", kind: 0, pos: 307},
+			{type: "n", kind: 1, pos: 308}, {type: "n", kind: 0, pos: 308},
+			{type: "n", kind: 1, pos: 309}, {type: "n", kind: 0, pos: 309},
+			{type: "n", kind: 1, pos: 310}, {type: "n", kind: 3, pos: 310, dur: 1.5},
+			{type: "n", kind: 2, pos: 312}, // Drum & Bass
+			{type: "n", kind: 1, pos: 313},
+			{type: "n", kind: 2, pos: 314.5},
+			{type: "n", kind: 1, pos: 315},
+			{type: "n", kind: 2, pos: 316},
+			{type: "n", kind: 1, pos: 317},
+			{type: "n", kind: 2, pos: 318.5},
+			{type: "n", kind: 1, pos: 319},
+			{type: "n", kind: 3, pos: 320, dur: 3},
+			{type: "n", kind: 0, pos: 324},
+			{type: "n", kind: 0, pos: 328}, {type: "n", kind: 1, pos: 328}, // UK Hardcore
+			{type: "n", kind: 0, pos: 329}, {type: "n", kind: 1, pos: 329},
+			{type: "n", kind: 0, pos: 329.5},
+			{type: "n", kind: 1, pos: 330},
+			{type: "n", kind: 0, pos: 330.5},
+			{type: "n", kind: 1, pos: 331},
+			{type: "n", kind: 0, pos: 331.5},
+			{type: "n", kind: 1, pos: 332},
+			{type: "n", kind: 0, pos: 332.5},
+			{type: "n", kind: 1, pos: 333},
+			{type: "n", kind: 0, pos: 333.5},
+			{type: "n", kind: 0, pos: 334}, {type: "n", kind: 1, pos: 334},
+			{type: "n", kind: 0, pos: 335}, {type: "n", kind: 1, pos: 335},
+			{type: "n", kind: 0, pos: 336}, {type: "n", kind: 1, pos: 336},
+			{type: "n", kind: 1, pos: 337},
+			{type: "n", kind: 1, pos: 338},
+			{type: "n", kind: 1, pos: 339},
+			{type: "n", kind: 1, pos: 340},
+			{type: "n", kind: 1, pos: 341},
+			{type: "n", kind: 1, pos: 342},
+			{type: "n", kind: 1, pos: 343},
+			{type: "n", kind: 0, pos: 344}, {type: "n", kind: 1, pos: 344},
+			{type: "n", kind: 0, pos: 345}, {type: "n", kind: 1, pos: 345},
+			{type: "n", kind: 0, pos: 345.5},
+			{type: "n", kind: 1, pos: 346},
+			{type: "n", kind: 0, pos: 346.5},
+			{type: "n", kind: 1, pos: 347},
+			{type: "n", kind: 0, pos: 347.5},
+			{type: "n", kind: 1, pos: 348},
+			{type: "n", kind: 0, pos: 348.5},
+			{type: "n", kind: 1, pos: 349},
+			{type: "n", kind: 0, pos: 349.5},
+			{type: "n", kind: 0, pos: 350}, {type: "n", kind: 1, pos: 350},
+			{type: "n", kind: 0, pos: 351}, {type: "n", kind: 1, pos: 351},
+			{type: "n", kind: 0, pos: 351.5},
+			{type: "n", kind: 1, pos: 352},
+			{type: "n", kind: 1, pos: 353},
+			{type: "n", kind: 1, pos: 354},
+			{type: "n", kind: 1, pos: 355},
+			{type: "n", kind: 1, pos: 356},
+			{type: "n", kind: 1, pos: 357},
+			{type: "n", kind: 1, pos: 358},
+			{type: "n", kind: 0, pos: 360}, {type: "n", kind: 1, pos: 360},
+			{type: "n", kind: 0, pos: 361}, {type: "n", kind: 1, pos: 361},
+			{type: "n", kind: 0, pos: 361.5},
+			{type: "n", kind: 1, pos: 362},
+			{type: "n", kind: 0, pos: 362.5},
+			{type: "n", kind: 1, pos: 363},
+			{type: "n", kind: 0, pos: 363.5},
+			{type: "n", kind: 1, pos: 364},
+			{type: "n", kind: 0, pos: 364.5},
+			{type: "n", kind: 1, pos: 365},
+			{type: "n", kind: 0, pos: 365.5},
+			{type: "n", kind: 0, pos: 366}, {type: "n", kind: 1, pos: 366},
+			{type: "n", kind: 0, pos: 367}, {type: "n", kind: 1, pos: 367},
+			{type: "n", kind: 0, pos: 368}, {type: "n", kind: 1, pos: 368},
+			{type: "n", kind: 1, pos: 369},
+			{type: "n", kind: 1, pos: 370},
+			{type: "n", kind: 1, pos: 371},
+			{type: "n", kind: 1, pos: 372},
+			{type: "n", kind: 1, pos: 373},
+			{type: "n", kind: 1, pos: 374},
+			{type: "n", kind: 1, pos: 375},
+			{type: "n", kind: 0, pos: 376}, {type: "n", kind: 1, pos: 376},
+			{type: "n", kind: 0, pos: 377}, {type: "n", kind: 1, pos: 377},
+			{type: "n", kind: 0, pos: 377.5},
+			{type: "n", kind: 1, pos: 378},
+			{type: "n", kind: 0, pos: 378.5},
+			{type: "n", kind: 1, pos: 379},
+			{type: "n", kind: 0, pos: 379.5},
+			{type: "n", kind: 1, pos: 380},
+			{type: "n", kind: 0, pos: 380.5},
+			{type: "n", kind: 1, pos: 381},
+			{type: "n", kind: 0, pos: 381.5},
+			{type: "n", kind: 0, pos: 382}, {type: "n", kind: 1, pos: 382},
+			{type: "n", kind: 0, pos: 383}, {type: "n", kind: 1, pos: 383},
+			{type: "n", kind: 0, pos: 383.5},
+			{type: "n", kind: 1, pos: 384.5},
+			{type: "n", kind: 1, pos: 384.75},
+			{type: "n", kind: 1, pos: 385},
+			{type: "n", kind: 1, pos: 386},
+			{type: "n", kind: 1, pos: 386.25},
+			{type: "n", kind: 1, pos: 386.5},
+			{type: "n", kind: 1, pos: 387.5},
+			{type: "n", kind: 1, pos: 387.75},
+			{type: "n", kind: 1, pos: 388},
+			{type: "n", kind: 1, pos: 389},
+			{type: "n", kind: 1, pos: 389.25},
+			{type: "n", kind: 1, pos: 389.5},
+			{type: "n", kind: 1, pos: 390},
+			{type: "n", kind: 1, pos: 390.5},
+			{type: "n", kind: 3, pos: 392, dur: 2}, // Future Bass
+			{type: "n", kind: 1, pos: 394},
+			{type: "n", kind: 1, pos: 394.5},
+			{type: "n", kind: 3, pos: 395, dur: 1.5},
+			{type: "n", kind: 1, pos: 396.5},
+			{type: "n", kind: 0, pos: 397.5},
+			{type: "n", kind: 0, pos: 398.5},
+			{type: "n", kind: 0, pos: 399},
+			{type: "n", kind: 0, pos: 399.5},
+			{type: "n", kind: 3, pos: 400, dur: 2},
+			{type: "n", kind: 1, pos: 402},
+			{type: "n", kind: 1, pos: 402+1/3},
+			{type: "n", kind: 1, pos: 402+2/3},
+			{type: "n", kind: 3, pos: 403, dur: 1.5},
+			{type: "n", kind: 1, pos: 404.5},
+			{type: "n", kind: 0, pos: 405.5},
+			{type: "n", kind: 0, pos: 407},
+			{type: "n", kind: 2, pos: 408}, // Intelligent Drum & Bass
+			{type: "n", kind: 1, pos: 409.5},
+			{type: "n", kind: 2, pos: 412},
+			{type: "n", kind: 2, pos: 413.5},
+			{type: "n", kind: 2, pos: 415},
+			{type: "n", kind: 1, pos: 416},
+			{type: "n", kind: 2, pos: 417.5},
+			{type: "n", kind: 2, pos: 420},
+			{type: "n", kind: 2, pos: 421.5},
+			{type: "n", kind: 3, pos: 424, dur: 2}, // Future Bass
+			{type: "n", kind: 1, pos: 426},
+			{type: "n", kind: 1, pos: 426.5},
+			{type: "n", kind: 3, pos: 427, dur: 1.5},
+			{type: "n", kind: 1, pos: 428.5},
+			{type: "n", kind: 0, pos: 429.5},
+			{type: "n", kind: 0, pos: 430.5},
+			{type: "n", kind: 0, pos: 431},
+			{type: "n", kind: 0, pos: 431.5},
+			{type: "n", kind: 3, pos: 432, dur: 2},
+			{type: "n", kind: 1, pos: 434},
+			{type: "n", kind: 1, pos: 434+1/3},
+			{type: "n", kind: 1, pos: 434+2/3},
+			{type: "n", kind: 3, pos: 435, dur: 1.5},
+			{type: "n", kind: 1, pos: 436.5},
+			{type: "n", kind: 0, pos: 437.5},
+			{type: "n", kind: 2, pos: 440}, // Intelligent Drum & Bass
+			{type: "n", kind: 1, pos: 441.5},
+			{type: "n", kind: 2, pos: 444},
+			{type: "n", kind: 2, pos: 445.5},
+			{type: "n", kind: 2, pos: 447},
+			{type: "n", kind: 1, pos: 448},
+			{type: "n", kind: 2, pos: 449.5},
+			{type: "n", kind: 2, pos: 452},
+			{type: "n", kind: 3, pos: 453},
+			{type: "n", kind: 2, pos: 453.5}, {type: "n", kind: 3, pos: 453.5},
+			{type: "n", kind: 3, pos: 454},
+			{type: "n", kind: 3, pos: 454.5},
+			{type: "n", kind: 3, pos: 455, dur: 1},
+			{type: "n", kind: 0, pos: 457},
+			{type: "n", kind: 0, pos: 458.5},
+			{type: "n", kind: 0, pos: 461},
+			{type: "n", kind: 0, pos: 462.5},
+			{type: "n", kind: 0, pos: 465},
+			{type: "n", kind: 0, pos: 466.5},
+			{type: "n", kind: 0, pos: 469},
+			{type: "n", kind: 1, pos: 470},
+			{type: "n", kind: 1, pos: 471},
+			{type: "n", kind: 2, pos: 472}, // Speedcore / Breakcore
+			{type: "n", kind: 1, pos: 472.5},
+			{type: "n", kind: 1, pos: 473},
+			{type: "n", kind: 2, pos: 473.5},
+			{type: "n", kind: 1, pos: 474},
+			{type: "n", kind: 1, pos: 474.5},
+			{type: "n", kind: 2, pos: 475},
+			{type: "n", kind: 1, pos: 475.5},
+			{type: "n", kind: 1, pos: 476},
+			{type: "n", kind: 2, pos: 476.5},
+			{type: "n", kind: 1, pos: 477},
+			{type: "n", kind: 1, pos: 477.5},
+			{type: "n", kind: 2, pos: 478},
+			{type: "n", kind: 1, pos: 478.5},
+			{type: "n", kind: 1, pos: 479},
+			{type: "n", kind: 2, pos: 479.5},
+			{type: "n", kind: 1, pos: 480},
+			{type: "n", kind: 1, pos: 480.5},
+			{type: "n", kind: 2, pos: 481},
+			{type: "n", kind: 1, pos: 481.5},
+			{type: "n", kind: 1, pos: 482},
+			{type: "n", kind: 2, pos: 482.5},
+			{type: "n", kind: 1, pos: 483},
+			{type: "n", kind: 1, pos: 483.5},
+			{type: "n", kind: 3, pos: 488, dur: 2}, // Moombahcore
+			{type: "n", kind: 2, pos: 490},
+			{type: "n", kind: 1, pos: 490.5},
+			{type: "n", kind: 1, pos: 491},
+			{type: "n", kind: 1, pos: 491.5},
+			{type: "n", kind: 2, pos: 492},
+			{type: "n", kind: 1, pos: 492.5},
+			{type: "n", kind: 1, pos: 493},
+			{type: "n", kind: 1, pos: 493.5},
+			{type: "n", kind: 3, pos: 494, dur: 2},
+			{type: "n", kind: 0, pos: 496},
+			{type: "n", kind: 0, pos: 497},
+			{type: "n", kind: 2, pos: 498},
+			{type: "n", kind: 1, pos: 498.5},
+			{type: "n", kind: 1, pos: 499},
+			{type: "n", kind: 1, pos: 499.5},
+			{type: "n", kind: 2, pos: 500},
+			{type: "n", kind: 1, pos: 500.5},
+			{type: "n", kind: 1, pos: 501},
+			{type: "n", kind: 1, pos: 501.5},
+			{type: "n", kind: 3, pos: 502, dur: 2},
+			{type: "n", kind: 2, pos: 504}, // Hybrid Trap
+			{type: "n", kind: 1, pos: 506},
+			{type: "n", kind: 2, pos: 509},
+			{type: "n", kind: 1, pos: 510},
+			{type: "n", kind: 2, pos: 512},
+			{type: "n", kind: 1, pos: 514},
+			{type: "n", kind: 2, pos: 517},
+			{type: "n", kind: 1, pos: 518},
+
+			{type: "n", kind: 0, pos: 664},
+			{type: "n", kind: 0, pos: 665.5},
+			{type: "n", kind: 0, pos: 667},
+			{type: "b", bpm: bpms[1], offset: 668},
+			{type: "n", kind: 0, pos: 0.5},
+			{type: "n", kind: 0, pos: 2},
+			{type: "n", kind: 0, pos: 3},
+			{type: "b", bpm: bpms[2], offset: 4},
+			{type: "n", kind: 0, pos: 0},
+			{type: "n", kind: 0, pos: 1.5},
+			{type: "n", kind: 0, pos: 3},
+			{type: "b", bpm: bpms[3], offset: 4},
+			{type: "n", kind: 0, pos: 0.5},
+			{type: "n", kind: 0, pos: 2},
+			{type: "n", kind: 0, pos: 3},
+			{type: "b", bpm: bpms[4], offset: 4},
+			{type: "n", kind: 0, pos: 0},
+			{type: "n", kind: 0, pos: 1.5},
+			{type: "n", kind: 0, pos: 3},
+			{type: "b", bpm: bpms[5], offset: 4},
+			{type: "n", kind: 0, pos: 0.5},
+			{type: "n", kind: 0, pos: 2},
+			{type: "n", kind: 0, pos: 3},
+			{type: "b", bpm: bpms[6], offset: 4},
+			{type: "b", bpm: bpms[7], offset: 4},
+			{type: "n", kind: 3, pos: 3},
+			{type: "n", kind: 3, pos: 3.25},
+			{type: "n", kind: 3, pos: 3.5},
+			{type: "n", kind: 3, pos: 3.75},
+			{type: "b", bpm: bpms[8], offset: 4},
+			{type: "n", kind: 1, pos: 0},
+			{type: "n", kind: 1, pos: 1},
+			{type: "n", kind: 1, pos: 2},
+			{type: "n", kind: 1, pos: 3},
+			{type: "n", kind: 1, pos: 4},
+			{type: "n", kind: 1, pos: 5},
+			{type: "n", kind: 1, pos: 6},
+			{type: "n", kind: 1, pos: 7},
+		];
 		let audioFile = "m1lli0n_pp.ogg";
+		let fishFile = "./fish.png";
+		let tmp = []
+		tmp.push(64/234*60+2.82)
+		tmp.push(72/234*60+tmp[0])
+		tmp.push(64/234*60+tmp[1])
+		tmp.push(16/234*60+tmp[2])
+		tmp.push(16/234*60+tmp[3])
+		tmp.push(16/234*60+tmp[4])
+		tmp.push(16/234*60+tmp[5])
+		tmp.push(16/234*60+tmp[6])
+		tmp.push(16/234*60+tmp[7])
+		tmp.push(16/234*60+tmp[8])
+		tmp.push(16/234*60+tmp[9])
+		tmp.push(64/234*60+tmp[10])
+		tmp.push(16/234*60+tmp[11])
+		tmp.push(16/234*60+tmp[12])
+		tmp.push(16/234*60+tmp[13])
+		tmp.push(16/234*60+tmp[14])
+		tmp.push(16/234*60+tmp[15])
+		tmp.push(16/234*60+tmp[16])
+		tmp.push(16/234*60+tmp[17])
+		tmp.push(16/234*60+tmp[18])
+		tmp.push(16/234*60+tmp[19])
+		tmp.push(16/234*60+tmp[20])
+		tmp.push(16/234*60+tmp[21])
+		tmp.push(16/234*60+tmp[22])
+		tmp.push(16/234*60+tmp[23])
+		tmp.push(64/234*60+tmp[24])
+		tmp.push(4/bpms[0]*60+4/bpms[1]*60+4/bpms[2]*60+4/bpms[3]*60+4/bpms[4]*60+4/bpms[5]*60+4/bpms[6]*60+4/bpms[7]*60+tmp[25])
+		function earlygimmick() {
+			ctx.filter = "none"
+			if(time<tmp[0]) {
+				ctx.filter = "grayscale(75%)" // Ambient Glitch
+			}
+			else if((time>tmp[3] && time<tmp[4]) || (time>tmp[7] && time<tmp[8])) {
+				ctx.filter = "brightness(75%) grayscale(75%)" // Frenchcore / Gabber
+			}
+		}
 		function gimmick() {
 			// pass;
 		}
 		function lategimmick() {
+			ctx.fillStyle = "#0000"
+			if(time>tmp[0] && time<tmp[1]) {
+				ctx.fillStyle = "#3755" // Ambient / Artcore
+			}
+			else if((time>tmp[1] && time<tmp[2]) || (time>tmp[16] && time<tmp[17])) {
+				ctx.fillStyle = "#f005" // Speedcore / Breakcore
+			}
+			else if((time>tmp[2] && time<tmp[3]) || (time>tmp[4] && time<tmp[5]) || (time>tmp[6] && time<tmp[7]) || (time>tmp[8] && time<tmp[9])) {
+				ctx.fillStyle = "#7375" // Hardcore
+			}
+			else if((time>tmp[5] && time<tmp[6]) || (time>tmp[9] && time<tmp[10])) {
+				ctx.fillStyle = "#5435" // Drum & Bass
+			}
+			else if(time>tmp[10] && time<tmp[11]) {
+				ctx.fillStyle = "#7535" // UK Hardcore
+			}
+			else if((time>tmp[11] && time<tmp[12]) || (time>tmp[13] && time<tmp[14])) {
+				ctx.fillStyle = "#5355" // Future Bass
+			}
+			else if((time>tmp[12] && time<tmp[13]) || (time>tmp[14] && time<tmp[15])) {
+				ctx.fillStyle = "#5558" // Intelligent Drum & Bass
+			}
+			else if((time>tmp[17] && time<tmp[18]) || (time>tmp[21] && time<tmp[22])) {
+				ctx.fillStyle = "#3735" // Moombahcore
+			}
+			else if((time>tmp[18] && time<tmp[19]) || (time>tmp[22] && time<tmp[23])) {
+				ctx.fillStyle = "#3138" // Hybrid Trap
+			}
+			else if((time>tmp[19] && time<tmp[20]) || (time>tmp[23] && time<tmp[24])) {
+				ctx.fillStyle = "#7735" // Glitch Hop
+			}
+			else if((time>tmp[20] && time<tmp[21]) || (time>tmp[24] && time<tmp[25])) {
+				ctx.fillStyle = "#700A" // Symphonic Metal
+			}
+			ctx.fillRect(0, 0, cvs.width, cvs.height)
 			// pass;
 		}
 	</script>

@@ -27,6 +27,7 @@ function init() {
 	cvs.id = 'canvas';
 	cvs.width = window.innerWidth;
 	cvs.height = window.innerHeight;
+	cvs.style.cursor = "none";
 	document.body.replaceChild(cvs, document.getElementById('startup'));
 	cvs.requestFullscreen();
 	ctx = cvs.getContext('2d');
@@ -66,7 +67,7 @@ function init() {
 	});
 }
 let fish = new Image();
-fish.src = "https://01320nabi.github.io/multiprocessing/list/fish.png";
+fish.src = fishFile;
 let time;
 let _drawRange = [{min: 0, max: 0}, {min: 0, max: 0}, {min: 0, max: 0}, {min: 0, max: 0}];
 let drawRange = [];
@@ -75,6 +76,7 @@ function draw() {
 	let __time = audio.currentTime;
 	cvs.width = window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;
 	cvs.height = window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight;
+	earlygimmick();
 	ctx.lineWidth = cvs.width/200;
 	ctx.font = cvs.height/20+'px sans-serif';
 	ctx.textAlign = 'center';
@@ -279,9 +281,9 @@ function draw() {
 		if(!finished) {
 			document.exitFullscreen();
 			finished = true;
+			cvs.style.cursor = "auto";
 		}
 	}
-
 	// Call LateGimmick
 	lategimmick();
 	requestAnimationFrame(draw);
@@ -325,7 +327,7 @@ function keydown(e) {
 				result[3][0]++;
 				break;
 			}
-		break;/*/
+		break;//*/
 	case 32:	// Debug Mode
 		if(audio.paused)
 			audio.play();
@@ -337,11 +339,11 @@ function keydown(e) {
 		break;
 	case 39:
 		audio.currentTime += 10;
-		break;/*/
+		break;//*/
 	}
 }
 function keyup(e) {
-	if(e.keyCode==75) {		// K
+	if(e.keyCode == 75 || e.keyCode == 69) {		// K
 		lettime = audio.currentTime;
 		for(let i=0; i<nList[3].length; i++) {
 			if(nList[3][i].b&&nList[3][i].s==1&&nList[3][i].t<time-0.1&&nList[3][i].t+nList[3][i].d>time+0.1) {

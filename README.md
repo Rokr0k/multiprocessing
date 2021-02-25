@@ -64,7 +64,10 @@ let crochet = [
 ## Gimmick Patterns
 Users that are familiar with javascript may make some gimmick patterns in their levels.
 ```js
-function gimmick() { // Code before the graphics are completely drawn.
+function earlygimmick() { // Code before the graphics start to be drawn.
+    // pass;
+}
+function gimmick() { // Code before the notes are drawn.
     // pass;
 }
 function lategimmick() { // Code after the graphics are completely drawn.
