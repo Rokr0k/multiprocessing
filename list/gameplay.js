@@ -110,7 +110,7 @@ function draw() {
 	while(_drawRange[2].min<nList[2].length&&cvs.height/15+(time - nList[2][_drawRange[2].min].t)*cvs.width/2>Math.sqrt(Math.pow(cvs.width/4*3, 2)+Math.pow(cvs.height/4*3, 2))) {
 		_drawRange[2].max = ++_drawRange[2].min;
 	}
-	while(_drawRange[2].max<nList[2].length&&cvs.width/4-Math.pow(nList[2][_drawRange[2].max].t - time, 2)*cvs.width/20+cvs.height/15>0) {
+	while(_drawRange[2].max<nList[2].length&&(nList[2][_drawRange[2].max].t < time||cvs.width/4-Math.pow(nList[2][_drawRange[2].max].t - time, 2)*cvs.width/5+cvs.height/15>0)) {
 		_drawRange[2].max++;
 	}
 	while(_drawRange[3].min<nList[3].length&&cvs.width/10*7+(nList[3][_drawRange[3].min].t+nList[3][_drawRange[3].min].d-time)*cvs.width/4<cvs.width/2) {
@@ -197,7 +197,7 @@ function draw() {
 		ctx.beginPath();
 		ctx.fillStyle = ctx.strokeStyle = nList[2][i].s==0?'white':nList[2][i].s>0?'green':'red';
 		if(nList[2][i].t>time) {
-			ctx.arc(cvs.width/4-(nList[2][i].t - time)*(nList[2][i].t - time)*cvs.width/20, cvs.height/4*3, cvs.height/15, 0, Math.PI*2);
+			ctx.arc(cvs.width/4-Math.pow(nList[2][i].t - time, 2)*cvs.width/5, cvs.height/4*3, cvs.height/15, 0, Math.PI*2);
 			ctx.fill();
 		}
 		else {
