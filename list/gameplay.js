@@ -14,9 +14,9 @@ playButton.onclick = function() {
 	audio.play();
 };
 window.onkeydown = function(e) {
-	if(!playButton.disabled&&e.keyCode==80)
+	if(!playButton.disabled&&e.code === "KeyP")
 		playButton.onclick();
-	else if(e.keyCode==65)
+	else if(e.code === "KeyA")
 		console.log(auto());
 };
 let nList = [[], [], [], []];
@@ -165,7 +165,7 @@ function draw() {
 		ctx.stroke();
 		ctx.closePath();
 		if(__$__$_&&nList[0][i].s==0&&nList[0][i].t<__time) {
-			keydown({keyCode: 70});
+			keydown({code: "KeyF"});
 		}
 	}
 
@@ -185,7 +185,7 @@ function draw() {
 		}
 		ctx.fill();
 		if(__$__$_&&nList[1][i].s==0&&nList[1][i].t<__time)
-			keydown({keyCode: 74});
+			keydown({code: "KeyJ"});
 	}
 
 	// Draw Shoot Part
@@ -206,7 +206,7 @@ function draw() {
 			ctx.closePath();
 		}
 		if(__$__$_&&nList[2][i].s==0&&nList[2][i].t<__time)
-			keydown({keyCode: 68});
+			keydown({code: "KeyD"});
 	}
 	ctx.beginPath();
 	ctx.strokeStyle = 'pink';
@@ -251,7 +251,7 @@ function draw() {
 			ctx.closePath();
 		}
 		if(__$__$_&&nList[3][i].s==0&&nList[3][i].t<__time) {
-			keydown({keyCode: 75});
+			keydown({code: "KeyK"});
 		}
 	}
 	ctx.strokeStyle = 'black';
@@ -291,9 +291,9 @@ function draw() {
 let finished = false;
 function keydown(e) {
 	let time = audio.currentTime;
-	switch(e.keyCode) {
-	case 70:	// F
-	case 85:
+	switch(e.code) {
+	case "KeyF":	// F
+	case "KeyU":
 		for(let i=0; i<nList[0].length; i++)
 			if(nList[0][i].s==0&&Math.abs(nList[0][i].t-time)<0.1) {
 				nList[0][i].s = 1;
@@ -301,8 +301,8 @@ function keydown(e) {
 				break;
 			}
 		break;
-	case 74:	// J
-	case 82:
+	case "KeyJ":	// J
+	case "KeyR":
 		for(let i=0; i<nList[1].length; i++)
 			if(nList[1][i].s==0&&Math.abs(nList[1][i].t-time)<0.1) {
 				nList[1][i].s = 1;
@@ -310,8 +310,8 @@ function keydown(e) {
 				break;
 			}
 		break;
-	case 68:	// D
-	case 73:
+	case "KeyD":	// D
+	case "KeyI":
 		for(let i=0; i<nList[2].length; i++)
 			if(nList[2][i].s==0&&Math.abs(nList[2][i].t-time)<0.1) {
 				nList[2][i].s = 1;
@@ -319,8 +319,8 @@ function keydown(e) {
 				break;
 			}
 		break;
-	case 75:	// K
-	case 69:
+	case "KeyK":	// K
+	case "KeyE":
 		for(let i=0; i<nList[3].length; i++)
 			if(nList[3][i].s==0&&Math.abs(nList[3][i].t-time)<0.1) {
 				nList[3][i].s = 1;
@@ -328,22 +328,22 @@ function keydown(e) {
 				break;
 			}
 		break;//*/
-	case 32:	// Debug Mode
+	case "Space":	// Debug Mode
 		if(audio.paused)
 			audio.play();
 		else
 			audio.pause();
 		break;
-	case 37:
+	case "ArrowLeft":
 		audio.currentTime -= 10;
 		break;
-	case 39:
+	case "ArrowRight":
 		audio.currentTime += 10;
 		break;//*/
 	}
 }
 function keyup(e) {
-	if(e.keyCode == 75 || e.keyCode == 69) {		// K
+	if(e.code === "KeyK" || e.code === "KeyE") {		// K
 		lettime = audio.currentTime;
 		for(let i=0; i<nList[3].length; i++) {
 			if(nList[3][i].b&&nList[3][i].s==1&&nList[3][i].t<time-0.1&&nList[3][i].t+nList[3][i].d>time+0.1) {
