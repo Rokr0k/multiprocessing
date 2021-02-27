@@ -12,7 +12,7 @@
 		<p id='startup'><button id='play' disabled='true'>Play</button>Press P to Start, A for autoplay</p>
 	</body>
 	<script>
-		let bpms = [234, 215, 198, 182, 167, 154, 141, 130, 125, 130, 135, 138, 142, 148, 152, 156, 160, 166, 172, 175, 180, 185, 192, 200, 212, 220, 234]
+		const bpms = [234, 215, 198, 182, 167, 154, 141, 130, 125, 130, 135, 138, 142, 148, 152, 156, 160, 166, 172, 175, 180, 185, 192, 200, 212, 220, 234]
 		let crochet = [
 			{type: "b", bpm: bpms[0], offset: 2.82},
 			{type: "n", kind: 1, pos: 0},
@@ -63,8 +63,9 @@
 			{type: "n", kind: 1, pos: 68.5}, {type: "n", kind: 2, pos: 68.5},
 			{type: "n", kind: 2, pos: 70}, {type: "n", kind: 3, pos: 70, dur: 8},
 			{type: "n", kind: 3, pos: 79},
-			{type: "n", kind: 3, pos: 79+1/3},
-			{type: "n", kind: 3, pos: 79+2/3},
+			{type: "n", kind: 3, pos: 79.25},
+			{type: "n", kind: 3, pos: 79.5},
+			{type: "n", kind: 3, pos: 79.75},
 			{type: "n", kind: 2, pos: 80},
 			{type: "n", kind: 2, pos: 81.5}, {type: "n", kind: 3, pos: 81.5},
 			{type: "n", kind: 2, pos: 83},
@@ -149,14 +150,14 @@
 			{type: "n", kind: 2, pos: 222}, {type: "n", kind: 1, pos: 222},
 			{type: "n", kind: 2, pos: 223}, {type: "n", kind: 1, pos: 223},
 			{type: "n", kind: 2, pos: 224}, {type: "n", kind: 1, pos: 224},
-			{type: "n", kind: 2, pos: 224.5}, {type: "n", kind: 1, pos: 224.5},
+			{type: "n", kind: 1, pos: 224.5},
 			{type: "n", kind: 2, pos: 225}, {type: "n", kind: 1, pos: 225},
 			{type: "n", kind: 2, pos: 226}, {type: "n", kind: 1, pos: 226},
 			{type: "n", kind: 2, pos: 227}, {type: "n", kind: 1, pos: 227},
 			{type: "n", kind: 2, pos: 228}, {type: "n", kind: 1, pos: 228},
 			{type: "n", kind: 2, pos: 229}, {type: "n", kind: 1, pos: 229},
 			{type: "n", kind: 2, pos: 230}, {type: "n", kind: 1, pos: 230},
-			{type: "n", kind: 2, pos: 230.5}, {type: "n", kind: 1, pos: 230.5},
+			{type: "n", kind: 1, pos: 230.5},
 			{type: "n", kind: 2, pos: 231.5},
 			{type: "n", kind: 2, pos: 231.75},
 			{type: "n", kind: 2, pos: 232}, // Hardcore
@@ -354,7 +355,7 @@
 			{type: "n", kind: 1, pos: 394},
 			{type: "n", kind: 1, pos: 394.5},
 			{type: "n", kind: 3, pos: 395, dur: 1.5},
-			{type: "n", kind: 1, pos: 396.5},
+			{type: "n", kind: 1, pos: 397},
 			{type: "n", kind: 0, pos: 397.5},
 			{type: "n", kind: 0, pos: 398.5},
 			{type: "n", kind: 0, pos: 399},
@@ -364,7 +365,7 @@
 			{type: "n", kind: 1, pos: 402+1/3},
 			{type: "n", kind: 1, pos: 402+2/3},
 			{type: "n", kind: 3, pos: 403, dur: 1.5},
-			{type: "n", kind: 1, pos: 404.5},
+			{type: "n", kind: 1, pos: 405},
 			{type: "n", kind: 0, pos: 405.5},
 			{type: "n", kind: 0, pos: 407},
 			{type: "n", kind: 2, pos: 408}, // Intelligent Drum & Bass
@@ -380,7 +381,7 @@
 			{type: "n", kind: 1, pos: 426},
 			{type: "n", kind: 1, pos: 426.5},
 			{type: "n", kind: 3, pos: 427, dur: 1.5},
-			{type: "n", kind: 1, pos: 428.5},
+			{type: "n", kind: 1, pos: 429},
 			{type: "n", kind: 0, pos: 429.5},
 			{type: "n", kind: 0, pos: 430.5},
 			{type: "n", kind: 0, pos: 431},
@@ -390,7 +391,7 @@
 			{type: "n", kind: 1, pos: 434+1/3},
 			{type: "n", kind: 1, pos: 434+2/3},
 			{type: "n", kind: 3, pos: 435, dur: 1.5},
-			{type: "n", kind: 1, pos: 436.5},
+			{type: "n", kind: 1, pos: 437},
 			{type: "n", kind: 0, pos: 437.5},
 			{type: "n", kind: 2, pos: 440}, // Intelligent Drum & Bass
 			{type: "n", kind: 1, pos: 441.5},
@@ -489,7 +490,6 @@
 			{type: "n", kind: 0, pos: 532+2/3},
 			{type: "n", kind: 1, pos: 533},
 			{type: "n", kind: 0, pos: 533+2/3},
-			{type: "n", kind: 1, pos: 534},
 			{type: "n", kind: 1, pos: 534+2/3},
 			{type: "n", kind: 1, pos: 535},
 			{type: "n", kind: 1, pos: 536}, // Symphonic Metal
@@ -507,7 +507,6 @@
 			{type: "n", kind: 1, pos: 542},
 			{type: "n", kind: 1, pos: 542.5},
 			{type: "n", kind: 1, pos: 543},
-			{type: "n", kind: 1, pos: 543.5},
 			{type: "n", kind: 1, pos: 544},
 			{type: "n", kind: 1, pos: 544.5},
 			{type: "n", kind: 1, pos: 545},
@@ -523,6 +522,7 @@
 			{type: "n", kind: 1, pos: 550},
 			{type: "n", kind: 1, pos: 550.5},
 			{type: "n", kind: 1, pos: 551}, {type: "n", kind: 2, pos: 551},
+			{type: "n", kind: 1, pos: 551.5},
 			{type: "n", kind: 3, pos: 552, dur: 2}, // Moombahcore
 			{type: "n", kind: 2, pos: 554},
 			{type: "n", kind: 1, pos: 554.5},
@@ -574,7 +574,6 @@
 			{type: "n", kind: 0, pos: 596+2/3},
 			{type: "n", kind: 1, pos: 597},
 			{type: "n", kind: 0, pos: 597+2/3},
-			{type: "n", kind: 1, pos: 598},
 			{type: "n", kind: 1, pos: 598+2/3},
 			{type: "n", kind: 1, pos: 599},
 			{type: "n", kind: 1, pos: 600}, // Symphonic Metal
@@ -698,17 +697,21 @@
 			{type: "n", kind: 1, pos: 659},
 			{type: "n", kind: 1, pos: 659.5},
 			{type: "n", kind: 1, pos: 660},
-			{type: "n", kind: 1, pos: 660+1/3},
-			{type: "n", kind: 1, pos: 660+2/3},
+			{type: "n", kind: 1, pos: 660.25},
+			{type: "n", kind: 1, pos: 660.5},
+			{type: "n", kind: 1, pos: 660.75},
 			{type: "n", kind: 1, pos: 661},
-			{type: "n", kind: 1, pos: 661+1/3},
-			{type: "n", kind: 1, pos: 661+2/3},
+			{type: "n", kind: 1, pos: 661.25},
+			{type: "n", kind: 1, pos: 661.5},
+			{type: "n", kind: 1, pos: 661.75},
 			{type: "n", kind: 1, pos: 662},
-			{type: "n", kind: 1, pos: 662+1/3},
-			{type: "n", kind: 1, pos: 662+2/3},
+			{type: "n", kind: 1, pos: 662.25},
+			{type: "n", kind: 1, pos: 662.5},
+			{type: "n", kind: 1, pos: 662.75},
 			{type: "n", kind: 1, pos: 663},
-			{type: "n", kind: 1, pos: 663+1/3},
-			{type: "n", kind: 1, pos: 663+2/3},
+			{type: "n", kind: 1, pos: 663.25},
+			{type: "n", kind: 1, pos: 663.5},
+			{type: "n", kind: 1, pos: 663.75},
 			{type: "n", kind: 1, pos: 664},
 			{type: "b", bpm: bpms[0], offset: 664}, // BPM Transition
 			{type: "b", bpm: bpms[1], offset: 4},
@@ -722,7 +725,7 @@
 			{type: "n", kind: 3, pos: 3.25},
 			{type: "n", kind: 3, pos: 3.5},
 			{type: "n", kind: 3, pos: 3.75},
-			{type: "b", bpm: bpms[8], offset: 4},
+			{type: "b", bpm: bpms[8], offset: 4}, // Bridge
 			{type: "n", kind: 1, pos: 0},
 			{type: "n", kind: 1, pos: 1},
 			{type: "n", kind: 1, pos: 2},
@@ -789,8 +792,8 @@
 			{type: "n", kind: 1, pos: 37.25},
 			{type: "n", kind: 0, pos: 37.5},
 			{type: "n", kind: 1, pos: 38},
-			{type: "n", kind: 1, pos: 38+1/6},
-			{type: "n", kind: 1, pos: 38+1/3},
+			{type: "n", kind: 1, pos: 38.25},
+			{type: "n", kind: 1, pos: 38.375},
 			{type: "n", kind: 0, pos: 38.5},
 			{type: "n", kind: 0, pos: 39},
 			{type: "n", kind: 3, pos: 39.5},
@@ -810,8 +813,8 @@
 			{type: "n", kind: 1, pos: 45+1/3},
 			{type: "n", kind: 0, pos: 45.5},
 			{type: "n", kind: 1, pos: 46},
-			{type: "n", kind: 1, pos: 46+1/6},
-			{type: "n", kind: 1, pos: 46+1/3},
+			{type: "n", kind: 1, pos: 46.25},
+			{type: "n", kind: 1, pos: 46.375},
 			{type: "n", kind: 0, pos: 46.5},
 			{type: "n", kind: 0, pos: 46.75},
 			{type: "n", kind: 0, pos: 47},
@@ -918,6 +921,7 @@
 			{type: "n", kind: 2, pos: 12.75},
 			{type: "n", kind: 1, pos: 13},
 			{type: "n", kind: 2, pos: 13.5},
+			{type: "n", kind: 2, pos: 14},
 			{type: "b", bpm: bpms[12], offset: 16}, // Deep Tech-Trance
 			{type: "n", kind: 1, pos: 0},
 			{type: "n", kind: 0, pos: 0.5},
@@ -956,36 +960,280 @@
 			{type: "n", kind: 1, pos: 2.75},
 			{type: "n", kind: 1, pos: 3}, {type: "n", kind: 2, pos: 3},
 			{type: "n", kind: 1, pos: 3.5},
+			{type: "n", kind: 2, pos: 4},
+			{type: "n", kind: 1, pos: 5}, {type: "n", kind: 2, pos: 5},
+			{type: "n", kind: 1, pos: 5.5},
+			{type: "n", kind: 2, pos: 6},
+			{type: "n", kind: 1, pos: 6.25},
+			{type: "n", kind: 1, pos: 6.5},
+			{type: "n", kind: 1, pos: 6.75},
+			{type: "n", kind: 1, pos: 7}, {type: "n", kind: 2, pos: 7},
+			{type: "n", kind: 1, pos: 8}, {type: "n", kind: 2, pos: 8},
+			{type: "n", kind: 2, pos: 9},
+			{type: "n", kind: 1, pos: 9.5},
+			{type: "n", kind: 2, pos: 10},
+			{type: "n", kind: 1, pos: 10.25},
+			{type: "n", kind: 1, pos: 10.75},
+			{type: "n", kind: 1, pos: 11}, {type: "n", kind: 2, pos: 11},
+			{type: "n", kind: 1, pos: 11.5},
+			{type: "n", kind: 0, pos: 12}, {type: "n", kind: 2, pos: 12},
+			{type: "n", kind: 0, pos: 12.5},
+			{type: "n", kind: 0, pos: 13}, {type: "n", kind: 2, pos: 13},
+			{type: "n", kind: 0, pos: 13.5},
+			{type: "n", kind: 0, pos: 14}, {type: "n", kind: 2, pos: 14},
+			{type: "n", kind: 0, pos: 14.5},
+			{type: "n", kind: 0, pos: 15},
+			{type: "b", bpm: bpms[14], offset: 16}, // Rawstyle
+			{type: "n", kind: 2, pos: 0},
+			{type: "n", kind: 3, pos: 0.5},
+			{type: "n", kind: 2, pos: 1}, {type: "n", kind: 3, pos: 1},
+			{type: "n", kind: 3, pos: 1.25},
+			{type: "n", kind: 3, pos: 1.5},
+			{type: "n", kind: 2, pos: 2}, {type: "n", kind: 3, pos: 2},
+			{type: "n", kind: 3, pos: 2.5},
+			{type: "n", kind: 3, pos: 2.75},
+			{type: "n", kind: 2, pos: 3},
+			{type: "n", kind: 3, pos: 3.25},
+			{type: "n", kind: 3, pos: 3.5},
+			{type: "n", kind: 2, pos: 4},
+			{type: "n", kind: 3, pos: 4.5},
+			{type: "n", kind: 2, pos: 5}, {type: "n", kind: 3, pos: 5},
+			{type: "n", kind: 3, pos: 5.25},
+			{type: "n", kind: 3, pos: 5.5},
+			{type: "n", kind: 2, pos: 6}, {type: "n", kind: 3, pos: 6},
+			{type: "n", kind: 3, pos: 6.5},
+			{type: "n", kind: 2, pos: 6.75}, {type: "n", kind: 3, pos: 6.75},
+			{type: "n", kind: 2, pos: 7},
+			{type: "n", kind: 3, pos: 7.25},
+			{type: "n", kind: 2, pos: 7.5}, {type: "n", kind: 3, pos: 7.5},
+			{type: "n", kind: 1, pos: 8},
+			{type: "n", kind: 0, pos: 8.5},
+			{type: "n", kind: 0, pos: 9}, {type: "n", kind: 1, pos: 9},
+			{type: "n", kind: 0, pos: 9.25},
+			{type: "n", kind: 0, pos: 9.5},
+			{type: "n", kind: 0, pos: 10}, {type: "n", kind: 1, pos: 10},
+			{type: "n", kind: 0, pos: 10.5},
+			{type: "n", kind: 0, pos: 10.75},
+			{type: "n", kind: 1, pos: 11},
+			{type: "n", kind: 0, pos: 11.25},
+			{type: "n", kind: 0, pos: 11.5},
+			{type: "n", kind: 1, pos: 11.75},
+			{type: "n", kind: 1, pos: 12},
+			{type: "n", kind: 1, pos: 12.5},
+			{type: "n", kind: 0, pos: 13}, {type: "n", kind: 1, pos: 13},
+			{type: "n", kind: 0, pos: 14}, {type: "n", kind: 1, pos: 14},
+			{type: "n", kind: 0, pos: 14.25}, {type: "n", kind: 1, pos: 14.25},
+			{type: "n", kind: 0, pos: 14.75}, {type: "n", kind: 1, pos: 14.75},
+			{type: "n", kind: 1, pos: 15},
+			{type: "b", bpm: bpms[15], offset: 16}, // Bridge
+			{type: "n", kind: 0, pos: 12},
+			{type: "n", kind: 1, pos: 12.5},
+			{type: "n", kind: 0, pos: 13},
+			{type: "n", kind: 1, pos: 13.25},
+			{type: "n", kind: 3, pos: 13.75},
+			{type: "n", kind: 0, pos: 14}, {type: "n", kind: 3, pos: 14},
+			{type: "n", kind: 3, pos: 14.25},
+			{type: "n", kind: 0, pos: 14.5},
+			{type: "n", kind: 3, pos: 14.75},
+			{type: "n", kind: 0, pos: 15}, {type: "n", kind: 3, pos: 15, dur: 0.75},
+			{type: "b", bpm: bpms[16], offset: 16}, // Hybrid Trap
+			{type: "n", kind: 2, pos: 0},
+			{type: "n", kind: 1, pos: 2}, {type: "n", kind: 3, pos: 2},
+			{type: "n", kind: 3, pos: 2.5},
+			{type: "n", kind: 3, pos: 2.75},
+			{type: "n", kind: 2, pos: 3}, {type: "n", kind: 3, pos: 3},
+			{type: "n", kind: 3, pos: 3.5},
+			{type: "n", kind: 3, pos: 4},
+			{type: "n", kind: 3, pos: 4.5},
+			{type: "n", kind: 3, pos: 4.75},
+			{type: "n", kind: 2, pos: 5}, {type: "n", kind: 3, pos: 5},
+			{type: "n", kind: 3, pos: 5.25},
+			{type: "n", kind: 3, pos: 5.5},
+			{type: "n", kind: 1, pos: 6}, {type: "n", kind: 3, pos: 6},
+			{type: "n", kind: 3, pos: 6.5},
+			{type: "n", kind: 3, pos: 6.75},
+			{type: "n", kind: 3, pos: 7},
+			{type: "n", kind: 3, pos: 7.25},
+			{type: "n", kind: 3, pos: 7.5},
+			{type: "n", kind: 2, pos: 8},
+			{type: "n", kind: 1, pos: 10}, {type: "n", kind: 3, pos: 10},
+			{type: "n", kind: 2, pos: 10.5}, {type: "n", kind: 3, pos: 10.5},
+			{type: "n", kind: 2, pos: 11}, {type: "n", kind: 3, pos: 11},
+			{type: "n", kind: 3, pos: 11.5},
+			{type: "n", kind: 3, pos: 12},
+			{type: "n", kind: 2, pos: 12.5}, {type: "n", kind: 3, pos: 12.5},
+			{type: "n", kind: 2, pos: 13}, {type: "n", kind: 3, pos: 13},
+			{type: "n", kind: 3, pos: 13.25},
+			{type: "n", kind: 3, pos: 13.5},
+			{type: "n", kind: 1, pos: 14}, {type: "n", kind: 3, pos: 14},
+			{type: "n", kind: 3, pos: 14.5},
+			{type: "n", kind: 3, pos: 14.75},
+			{type: "n", kind: 3, pos: 15},
+			{type: "n", kind: 3, pos: 15.25},
+			{type: "n", kind: 3, pos: 15.5},
+			{type: "b", bpm: bpms[17], offset: 16}, // Brostep / Drumstep
+			{type: "n", kind: 3, pos: 0, dur: 1},
+			{type: "n", kind: 3, pos: 1.5},
+			{type: "n", kind: 3, pos: 1.625},
+			{type: "n", kind: 3, pos: 1.75},
+			{type: "n", kind: 3, pos: 1.875},
+			{type: "n", kind: 1, pos: 2}, {type: "n", kind: 3, pos: 2},
+			{type: "n", kind: 3, pos: 2.5},
+			{type: "n", kind: 3, pos: 2.75},
+			{type: "n", kind: 3, pos: 3.25},
+			{type: "n", kind: 3, pos: 3.5},
+			{type: "n", kind: 3, pos: 3.625},
+			{type: "n", kind: 3, pos: 3.75},
+			{type: "n", kind: 3, pos: 3.875},
+			{type: "n", kind: 3, pos: 4.5},
+			{type: "n", kind: 3, pos: 5},
+			{type: "n", kind: 3, pos: 5.25},
+			{type: "n", kind: 3, pos: 5.5},
+			{type: "n", kind: 1, pos: 6}, {type: "n", kind: 3, pos: 6},
+			{type: "n", kind: 3, pos: 6.5},
+			{type: "n", kind: 3, pos: 6.75},
+			{type: "n", kind: 3, pos: 7.25},
+			{type: "n", kind: 3, pos: 7.5},
+			{type: "n", kind: 3, pos: 7.625},
+			{type: "n", kind: 3, pos: 7.75},
+			{type: "n", kind: 3, pos: 7.875},
+			{type: "n", kind: 3, pos: 8, dur: 1},
+			{type: "n", kind: 3, pos: 9.5},
+			{type: "n", kind: 3, pos: 9.625},
+			{type: "n", kind: 3, pos: 9.75},
+			{type: "n", kind: 3, pos: 9.875},
+			{type: "n", kind: 1, pos: 10}, {type: "n", kind: 3, pos: 10},
+			{type: "n", kind: 3, pos: 10.5},
+			{type: "n", kind: 3, pos: 10.75},
+			{type: "n", kind: 3, pos: 11.25},
+			{type: "n", kind: 3, pos: 11.5},
+			{type: "n", kind: 3, pos: 11.625},
+			{type: "n", kind: 3, pos: 11.75},
+			{type: "n", kind: 3, pos: 11.875},
+			{type: "n", kind: 3, pos: 12.5},
+			{type: "n", kind: 3, pos: 13},
+			{type: "n", kind: 3, pos: 13.25},
+			{type: "n", kind: 3, pos: 13.5},
+			{type: "n", kind: 1, pos: 14}, {type: "n", kind: 3, pos: 14},
+			{type: "n", kind: 3, pos: 14.5, dur: 1},
+			{type: "b", bpm: bpms[18], offset: 16}, // Neurofunk
+			{type: "n", kind: 2, pos: 0},
+			{type: "n", kind: 1, pos: 1},
+			{type: "n", kind: 2, pos: 2.25},
+			{type: "n", kind: 1, pos: 3},
+			{type: "n", kind: 2, pos: 4},
+			{type: "n", kind: 1, pos: 5},
+			{type: "n", kind: 2, pos: 6.25},
+			{type: "n", kind: 1, pos: 7},
+			{type: "n", kind: 2, pos: 8},
+			{type: "n", kind: 1, pos: 9},
+			{type: "n", kind: 2, pos: 10.25},
+			{type: "n", kind: 1, pos: 11},
+			{type: "n", kind: 2, pos: 12},
+			{type: "n", kind: 1, pos: 13},
+			{type: "n", kind: 2, pos: 14.25},
+			{type: "n", kind: 1, pos: 15},
+			{type: "b", bpm: bpms[19], offset: 16}, // Hard Dance
+			{type: "n", kind: 2, pos: 0},
+			{type: "n", kind: 1, pos: 0.5}, {type: "n", kind: 3, pos: 0.5},
+			{type: "n", kind: 2, pos: 1}, {type: "n", kind: 3, pos: 1},
+			{type: "n", kind: 1, pos: 1.5}, {type: "n", kind: 3, pos: 1.5},
+			{type: "n", kind: 2, pos: 2}, {type: "n", kind: 3, pos: 2},
+			{type: "n", kind: 1, pos: 2.5}, {type: "n", kind: 3, pos: 2.5},
+			{type: "n", kind: 3, pos: 2.75},
+			{type: "n", kind: 2, pos: 3},
+			{type: "n", kind: 3, pos: 3.25},
+			{type: "n", kind: 1, pos: 3.5}, {type: "n", kind: 3, pos: 3.5},
+			{type: "n", kind: 2, pos: 4}, {type: "n", kind: 3, pos: 4},
+			{type: "n", kind: 1, pos: 4.5}, {type: "n", kind: 3, pos: 4.5},
+			{type: "n", kind: 3, pos: 4.75},
+			{type: "n", kind: 2, pos: 5},
+			{type: "n", kind: 3, pos: 5.25},
+			{type: "n", kind: 1, pos: 5.5}, {type: "n", kind: 3, pos: 5.5},
+			{type: "n", kind: 2, pos: 6}, {type: "n", kind: 3, pos: 6},
+			{type: "n", kind: 1, pos: 6.5}, {type: "n", kind: 3, pos: 6.5},
+			{type: "n", kind: 2, pos: 7}, {type: "n", kind: 3, pos: 7},
+			{type: "n", kind: 1, pos: 7.5}, {type: "n", kind: 3, pos: 7.5},
+			{type: "n", kind: 2, pos: 8},
+			{type: "n", kind: 1, pos: 8.5}, {type: "n", kind: 3, pos: 8.5},
+			{type: "n", kind: 2, pos: 9}, {type: "n", kind: 3, pos: 9},
+			{type: "n", kind: 1, pos: 9.5}, {type: "n", kind: 3, pos: 9.5},
+			{type: "n", kind: 2, pos: 10}, {type: "n", kind: 3, pos: 10},
+			{type: "n", kind: 1, pos: 10.5}, {type: "n", kind: 3, pos: 10.5},
+			{type: "n", kind: 3, pos: 10.75},
+			{type: "n", kind: 2, pos: 11},
+			{type: "n", kind: 3, pos: 11.25},
+			{type: "n", kind: 1, pos: 11.5}, {type: "n", kind: 3, pos: 11.5},
+			{type: "n", kind: 2, pos: 12}, {type: "n", kind: 3, pos: 12},
+			{type: "n", kind: 3, pos: 12.5},
+			{type: "n", kind: 3, pos: 12.75},
+			{type: "n", kind: 3, pos: 13.25},
+			{type: "n", kind: 3, pos: 13.5},
+			{type: "n", kind: 3, pos: 14},
+			{type: "n", kind: 3, pos: 14.5},
+			{type: "n", kind: 3, pos: 15},
+			{type: "n", kind: 3, pos: 15.5},
+			{type: "b", bpm: bpms[20], offset: 16}, // BPM Transition
+			{type: "b", bpm: bpms[21], offset: 4},
+			{type: "b", bpm: bpms[22], offset: 4},
+			{type: "b", bpm: bpms[23], offset: 4},
+			{type: "b", bpm: bpms[24], offset: 4},
+			{type: "b", bpm: bpms[25], offset: 4},
+			{type: "b", bpm: bpms[26], offset: 4},
+			{type: "n", kind: 2, pos: 0}, // Speedcore / Breakcore
+			{type: "n", kind: 1, pos: 0.5},
+			{type: "n", kind: 1, pos: 1},
+			{type: "n", kind: 2, pos: 1.5},
+			{type: "n", kind: 1, pos: 2},
+			{type: "n", kind: 1, pos: 2.5},
+			{type: "n", kind: 2, pos: 3},
+			{type: "n", kind: 1, pos: 3.5},
+			{type: "n", kind: 1, pos: 4},
+			{type: "n", kind: 2, pos: 4.5},
+			{type: "n", kind: 1, pos: 5},
+			{type: "n", kind: 1, pos: 5.5},
+			{type: "n", kind: 2, pos: 6},
+			{type: "n", kind: 1, pos: 6.5},
+			{type: "n", kind: 1, pos: 7},
+			{type: "n", kind: 2, pos: 7.5},
+			{type: "n", kind: 1, pos: 8},
+			{type: "n", kind: 1, pos: 8.5},
+			{type: "n", kind: 2, pos: 9},
+			{type: "n", kind: 1, pos: 9.5},
+			{type: "n", kind: 1, pos: 10},
+			{type: "n", kind: 2, pos: 10.5},
+			{type: "n", kind: 1, pos: 11},
+			{type: "n", kind: 1, pos: 11.5},
 		];
 		let audioFile = "m1lli0n_pp.ogg";
 		let fishFile = "./fish.png";
 		let tmp = []
-		tmp.push(64/234*60+2.82)
-		tmp.push(72/234*60+tmp[0])
-		tmp.push(64/234*60+tmp[1])
-		tmp.push(16/234*60+tmp[2])
-		tmp.push(16/234*60+tmp[3])
-		tmp.push(16/234*60+tmp[4])
-		tmp.push(16/234*60+tmp[5])
-		tmp.push(16/234*60+tmp[6])
-		tmp.push(16/234*60+tmp[7])
-		tmp.push(16/234*60+tmp[8])
-		tmp.push(16/234*60+tmp[9])
-		tmp.push(64/234*60+tmp[10])
-		tmp.push(16/234*60+tmp[11])
-		tmp.push(16/234*60+tmp[12])
-		tmp.push(16/234*60+tmp[13])
-		tmp.push(16/234*60+tmp[14])
-		tmp.push(16/234*60+tmp[15])
-		tmp.push(16/234*60+tmp[16])
-		tmp.push(16/234*60+tmp[17])
-		tmp.push(16/234*60+tmp[18])
-		tmp.push(16/234*60+tmp[19])
-		tmp.push(16/234*60+tmp[20])
-		tmp.push(16/234*60+tmp[21])
-		tmp.push(16/234*60+tmp[22])
-		tmp.push(16/234*60+tmp[23])
-		tmp.push(64/234*60+tmp[24])
+		tmp.push(64/bpms[0]*60+2.82)
+		tmp.push(72/bpms[0]*60+tmp[0])
+		tmp.push(64/bpms[0]*60+tmp[1])
+		tmp.push(16/bpms[0]*60+tmp[2])
+		tmp.push(16/bpms[0]*60+tmp[3])
+		tmp.push(16/bpms[0]*60+tmp[4])
+		tmp.push(16/bpms[0]*60+tmp[5])
+		tmp.push(16/bpms[0]*60+tmp[6])
+		tmp.push(16/bpms[0]*60+tmp[7])
+		tmp.push(16/bpms[0]*60+tmp[8])
+		tmp.push(16/bpms[0]*60+tmp[9])
+		tmp.push(64/bpms[0]*60+tmp[10])
+		tmp.push(16/bpms[0]*60+tmp[11])
+		tmp.push(16/bpms[0]*60+tmp[12])
+		tmp.push(16/bpms[0]*60+tmp[13])
+		tmp.push(16/bpms[0]*60+tmp[14])
+		tmp.push(16/bpms[0]*60+tmp[15])
+		tmp.push(16/bpms[0]*60+tmp[16])
+		tmp.push(16/bpms[0]*60+tmp[17])
+		tmp.push(16/bpms[0]*60+tmp[18])
+		tmp.push(16/bpms[0]*60+tmp[19])
+		tmp.push(16/bpms[0]*60+tmp[20])
+		tmp.push(16/bpms[0]*60+tmp[21])
+		tmp.push(16/bpms[0]*60+tmp[22])
+		tmp.push(16/bpms[0]*60+tmp[23])
+		tmp.push(64/bpms[0]*60+tmp[24])
 		tmp.push(4/bpms[7]*60+4/bpms[6]*60+4/bpms[5]*60+4/bpms[4]*60+4/bpms[3]*60+4/bpms[2]*60+4/bpms[1]*60+4/bpms[0]*60+tmp[25])
 		tmp.push(32/bpms[8]*60+tmp[26])
 		tmp.push(16/bpms[8]*60+tmp[27])
@@ -995,6 +1243,13 @@
 		tmp.push(16/bpms[12]*60+tmp[31])
 		tmp.push(16/bpms[13]*60+tmp[32])
 		tmp.push(16/bpms[14]*60+tmp[33])
+		tmp.push(16/bpms[15]*60+tmp[34])
+		tmp.push(16/bpms[16]*60+tmp[35])
+		tmp.push(16/bpms[17]*60+tmp[36])
+		tmp.push(16/bpms[18]*60+tmp[37])
+		tmp.push(16/bpms[19]*60+tmp[38])
+		tmp.push(4/bpms[25]*60+4/bpms[24]*60+4/bpms[23]*60+4/bpms[22]*60+4/bpms[21]*60+4/bpms[20]*60+tmp[39])
+		tmp.push(16/bpms[26]*60+tmp[40])
 		function earlygimmick() {
 			if(time<tmp[0]) {
 				ctx.filter = "grayscale(75%)" // Ambient Glitch
@@ -1003,24 +1258,45 @@
 				ctx.filter = "brightness(75%) grayscale(75%)" // Frenchcore / Gabber
 			}
 			else if(time > tmp[25] && time < tmp[26]) {
-				ctx.filter = "invert(" + (time - tmp[25]) / (tmp[26]-tmp[25]) * 100 + "%)"
+				let ratio = (time - tmp[25]) / (tmp[26]-tmp[25])
+				ctx.filter = "invert(" + ratio * 100 + "%)"
 			}
-			else if(time > tmp[26]) {
+			else if(time > tmp[26] && time < tmp[34]) {
 				ctx.filter = "invert(100%)"
+			}
+			else if(time > tmp[34] && time < tmp[35]) {
+				let ratio = (time - tmp[34]) / (tmp[35]-tmp[34])
+				ctx.filter = "hue-rotate(" + ratio * 180 + "deg) invert(" + (1 - ratio) * 100 + "%)"
+			}
+			else if(time > tmp[35] && time < tmp[39]) {
+				ctx.filter = "hue-rotate(180deg)"
+			}
+			else if(time > tmp[39] && time < tmp[40]) {
+				let ratio = (time - tmp[39]) / (tmp[40]-tmp[39])
+				ctx.filter = "hue-rotate(" + (1 + ratio) * 180 + "deg)"
 			}
 			else {
 				ctx.filter = "none"
 			}
 		}
 		function gimmick() {
-			// pass;
+			if((time > tmp[25] && time < tmp[26]) || (time > tmp[34] && time < tmp[35]) || (time > tmp[39] && time < tmp[40])) {
+				ctx.fillStyle = "green"
+				ctx.textAlign = "left"
+				ctx.textBaseline = "bottom"
+				ctx.fillText("Correct", cvs.width/2+100, cvs.height/2-100)
+				ctx.fillStyle = "red"
+				ctx.textAlign = "right"
+				ctx.textBaseline = "top"
+				ctx.fillText("Wrong", cvs.width/2-100, cvs.height/2+100)
+			}
 		}
 		function lategimmick() {
 			ctx.fillStyle = "#0000"
 			if(time>tmp[0] && time<tmp[1]) {
 				ctx.fillStyle = "#3755" // Ambient / Artcore
 			}
-			else if((time>tmp[1] && time<tmp[2]) || (time>tmp[16] && time<tmp[17])) {
+			else if((time>tmp[1] && time<tmp[2]) || (time>tmp[16] && time<tmp[17]) || (time>tmp[40] && time<tmp[41])) {
 				ctx.fillStyle = "#f005" // Speedcore / Breakcore
 			}
 			else if((time>tmp[2] && time<tmp[3]) || (time>tmp[4] && time<tmp[5]) || (time>tmp[6] && time<tmp[7]) || (time>tmp[8] && time<tmp[9])) {
@@ -1071,8 +1347,19 @@
 			else if(time>tmp[33] && time<tmp[34]) {
 				ctx.fillStyle = "#0C65" // Rawstyle
 			}
+			else if(time>tmp[35] && time<tmp[36]) {
+				ctx.fillStyle = "#1318" // Hybrid Trap
+			}
+			else if(time>tmp[36] && time<tmp[37]) {
+				ctx.fillStyle = "#6305" // Brostep / Drumstep
+			}
+			else if(time>tmp[37] && time<tmp[38]) {
+				ctx.fillStyle = "#9F35" // Neurofunk
+			}
+			else if(time>tmp[38] && time<tmp[39]) {
+				ctx.fillStyle = "#5FF5" // Hard Dance
+			}
 			ctx.fillRect(0, 0, cvs.width, cvs.height)
-			// pass;
 		}
 	</script>
 	<script src='./gameplay.js'></script>
