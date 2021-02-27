@@ -69,8 +69,8 @@ function init() {
 let fish = new Image();
 fish.src = fishFile;
 let time;
-let _drawRange = [{min: 0, max: 0}, {min: 0, max: 0}, {min: 0, max: 0}, {min: 0, max: 0}];
-let drawRange = [];
+let _drawRange = {0: {min: 0, max: 0}, 1: {min: 0, max: 0}, 2: {min: 0, max: 0}, 3: {min: 0, max: 0}};
+let drawRange = {};
 function draw() {
 	time = audio.currentTime;
 	let __time = audio.currentTime;
@@ -101,10 +101,10 @@ function draw() {
 	while(_drawRange[0].max<nList[0].length&&(nList[0][_drawRange[0].max].t - time) * cvs.width/4 + cvs.width/28*3-cvs.height/15<cvs.width/2) {
 		_drawRange[0].max++;
 	}
-	while(_drawRange[1].min<nList[1].length&&cvs.width/4*3+((nList[1][_drawRange[1].min].t - time)*cvs.width/4)+cvs.height/40<cvs.width/2) {
+	while(_drawRange[1].min<nList[1].length&&cvs.width/4*3+((nList[1][_drawRange[1].min].t - time)*cvs.width/4)<cvs.width/2) {
 		_drawRange[1].max = ++_drawRange[1].min;
 	}
-	while(_drawRange[1].max<nList[1].length&&cvs.width/4*3+((nList[1][_drawRange[1].max].t - time)*cvs.width/4)-cvs.height/40<cvs.width) {
+	while(_drawRange[1].max<nList[1].length&&cvs.width/4*3+((nList[1][_drawRange[1].max].t - time)*cvs.width/4)<cvs.width) {
 		_drawRange[1].max++;
 	}
 	while(_drawRange[2].min<nList[2].length&&cvs.height/15+(time - nList[2][_drawRange[2].min].t)*cvs.width/2>Math.sqrt(Math.pow(cvs.width/4*3, 2)+Math.pow(cvs.height/4*3, 2))) {
@@ -119,9 +119,7 @@ function draw() {
 	while(_drawRange[3].max<nList[3].length&&cvs.width/10*7+(nList[3][_drawRange[3].max].t-time)*cvs.width/4<cvs.width) {
 		_drawRange[3].max++;
 	}
-	for(let i=0; i<4; i++) {
-		drawRange[i] = {..._drawRange[i]};
-	}
+	drawRange = {..._drawRange}
 
 	// Call Gimmick
 	gimmick();
@@ -165,7 +163,7 @@ function draw() {
 		ctx.stroke();
 		ctx.closePath();
 		if(__$__$_&&nList[0][i].s==0&&nList[0][i].t<__time) {
-			keydown({code: "KeyF"});
+			keydown({code: "KeyF", auto: true});
 		}
 	}
 
@@ -185,7 +183,7 @@ function draw() {
 		}
 		ctx.fill();
 		if(__$__$_&&nList[1][i].s==0&&nList[1][i].t<__time)
-			keydown({code: "KeyJ"});
+			keydown({code: "KeyJ", auto: true});
 	}
 
 	// Draw Shoot Part
@@ -206,7 +204,7 @@ function draw() {
 			ctx.closePath();
 		}
 		if(__$__$_&&nList[2][i].s==0&&nList[2][i].t<__time)
-			keydown({code: "KeyD"});
+			keydown({code: "KeyD", auto: true});
 	}
 	ctx.beginPath();
 	ctx.strokeStyle = 'pink';
@@ -250,9 +248,8 @@ function draw() {
 			ctx.stroke();
 			ctx.closePath();
 		}
-		if(__$__$_&&nList[3][i].s==0&&nList[3][i].t<__time) {
-			keydown({code: "KeyK"});
-		}
+		if(__$__$_&&nList[3][i].s==0&&nList[3][i].t<__time)
+			keydown({code: "KeyK", auto: true});
 	}
 	ctx.strokeStyle = 'black';
 	ctx.beginPath();
@@ -290,12 +287,15 @@ function draw() {
 }
 let finished = false;
 function keydown(e) {
-	let time = audio.currentTime;
+	let __time = audio.currentTime;
 	switch(e.code) {
 	case "KeyF":	// F
 	case "KeyU":
+		if(__$__$_ && !e.auto) {
+			break;
+		}
 		for(let i=0; i<nList[0].length; i++)
-			if(nList[0][i].s==0&&Math.abs(nList[0][i].t-time)<0.1) {
+			if(nList[0][i].s==0&&Math.abs(nList[0][i].t-__time)<0.1) {
 				nList[0][i].s = 1;
 				result[0][0]++;
 				break;
@@ -303,8 +303,11 @@ function keydown(e) {
 		break;
 	case "KeyJ":	// J
 	case "KeyR":
+		if(__$__$_ && !e.auto) {
+			break;
+		}
 		for(let i=0; i<nList[1].length; i++)
-			if(nList[1][i].s==0&&Math.abs(nList[1][i].t-time)<0.1) {
+			if(nList[1][i].s==0&&Math.abs(nList[1][i].t-__time)<0.1) {
 				nList[1][i].s = 1;
 				result[1][0]++;
 				break;
@@ -312,8 +315,11 @@ function keydown(e) {
 		break;
 	case "KeyD":	// D
 	case "KeyI":
+		if(__$__$_ && !e.auto) {
+			break;
+		}
 		for(let i=0; i<nList[2].length; i++)
-			if(nList[2][i].s==0&&Math.abs(nList[2][i].t-time)<0.1) {
+			if(nList[2][i].s==0&&Math.abs(nList[2][i].t-__time)<0.1) {
 				nList[2][i].s = 1;
 				result[2][0]++;
 				break;
@@ -321,8 +327,11 @@ function keydown(e) {
 		break;
 	case "KeyK":	// K
 	case "KeyE":
+		if(__$__$_ && !e.auto) {
+			break;
+		}
 		for(let i=0; i<nList[3].length; i++)
-			if(nList[3][i].s==0&&Math.abs(nList[3][i].t-time)<0.1) {
+			if(nList[3][i].s==0&&Math.abs(nList[3][i].t-__time)<0.1) {
 				nList[3][i].s = 1;
 				result[3][0]++;
 				break;
@@ -344,9 +353,12 @@ function keydown(e) {
 }
 function keyup(e) {
 	if(e.code === "KeyK" || e.code === "KeyE") {		// K
-		lettime = audio.currentTime;
+		if(__$__$_ && !e.auto) {
+			return;
+		}
+		let __time = audio.currentTime;
 		for(let i=0; i<nList[3].length; i++) {
-			if(nList[3][i].b&&nList[3][i].s==1&&nList[3][i].t<time-0.1&&nList[3][i].t+nList[3][i].d>time+0.1) {
+			if(nList[3][i].b&&nList[3][i].s==1&&nList[3][i].t<__time-0.1&&nList[3][i].t+nList[3][i].d>__time+0.1) {
 				nList[3][i].s = -1;
 				result[3][0]--;
 				result[3][1]++;
