@@ -1,4 +1,4 @@
-let cvs;
+let cvs = document.createElement("canvas");
 let ctx;
 let playButton = document.getElementById('play');
 let audio = new Audio();
@@ -26,7 +26,6 @@ let nList = [[], [], [], []];
 let result = [[0, 0], [0, 0], [0, 0], [0, 0]];
 let last = 0;
 function init() {
-	cvs = document.createElement("canvas");
 	cvs.width = window.innerWidth;
 	cvs.height = window.innerHeight;
 	cvs.style.cursor = "none";
@@ -296,48 +295,52 @@ function keydown(e) {
 		if(__$__$_ && !e.auto) {
 			break;
 		}
-		for(let i=0; i<nList[0].length; i++)
+		for(let i=0; i<nList[0].length; i++) {
 			if(nList[0][i].s==0&&Math.abs(nList[0][i].t-__time)<0.1) {
 				nList[0][i].s = 1;
 				result[0][0]++;
 				break;
 			}
+		}
 		break;
 	case "KeyJ":	// J
 	case "KeyR":
 		if(__$__$_ && !e.auto) {
 			break;
 		}
-		for(let i=0; i<nList[1].length; i++)
+		for(let i=0; i<nList[1].length; i++) {
 			if(nList[1][i].s==0&&Math.abs(nList[1][i].t-__time)<0.1) {
 				nList[1][i].s = 1;
 				result[1][0]++;
 				break;
 			}
+		}
 		break;
 	case "KeyD":	// D
 	case "KeyI":
 		if(__$__$_ && !e.auto) {
 			break;
 		}
-		for(let i=0; i<nList[2].length; i++)
+		for(let i=0; i<nList[2].length; i++) {
 			if(nList[2][i].s==0&&Math.abs(nList[2][i].t-__time)<0.1) {
 				nList[2][i].s = 1;
 				result[2][0]++;
 				break;
 			}
+		}
 		break;
 	case "KeyK":	// K
 	case "KeyE":
 		if(__$__$_ && !e.auto) {
 			break;
 		}
-		for(let i=0; i<nList[3].length; i++)
+		for(let i=0; i<nList[3].length; i++) {
 			if(nList[3][i].s==0&&Math.abs(nList[3][i].t-__time)<0.1) {
 				nList[3][i].s = 1;
 				result[3][0]++;
 				break;
 			}
+		}
 		break;//*/
 	case "Space":	// Debug Mode
 		if(audio.paused)
@@ -370,57 +373,70 @@ function keyup(e) {
 	}
 }
 
-let touches = {};
+let currentTouches = [];
 function touchstart(e) {
-	e.preventDefault();
-	if(__$__$_ && !e.auto) {
+	if(__$__$_) {
 		return;
 	}
 	let __time = audio.currentTime;
-	e.changedTouches.forEach(touch => {
-		if(touch.clientX < cvs.width/2) {
-			if(touch.clientY < cvs.height/2) {
-				touches[touch.identifier] = 0;
+	for(const {identifier, clientX, clientY} in e.changedTouches) {
+		let pos = -1;
+		if(clientX < cvs.width/2) {
+			if(clientY < cvs.height/2) {
+				pos = 0;
 			}
 			else {
-				touches[touch.identifier] = 2;
+				pos = 2;
 			}
 		}
 		else {
-			if(touch.clientY < cvs.height/2) {
-				touches[touch.identifier] = 1;
+			if(clientY < cvs.height/2) {
+				pos = 1;
 			}
 			else {
-				touches[touch.identifier] = 3;
+				pos = 3;
 			}
 		}
-		for(let i=0; i<nList[touches[touch.identifier]].length; i++)
-		if(nList[touches[touch.identifier]][i].s==0&&Math.abs(nList[touches[touch.identifier]][i].t-__time)<0.1) {
-			nList[touches[touch.identifier]][i].s = 1;
-			result[touches[touch.identifier]][0]++;
-			return;
-		}
-	})
-}
-function touchend(e) {
-	e.preventDefault();
-	if(__$__$_ && !e.auto) {
-		return;
-	}
-	let __time = audio.currentTime;
-	e.changedTouches.forEach(touch => {
-		delete touches[touch.identifier];
-		if(touches.values().filter(v => v === 3).length === 0) {
-			for(let i=0; i<nList[3].length; i++) {
-				if(nList[3][i].b&&nList[3][i].s==1&&nList[3][i].t<__time-0.1&&nList[3][i].t+nList[3][i].d>__time+0.1) {
-					nList[3][i].s = -1;
-					result[3][0]--;
-					result[3][1]++;
-					return;
+		currentTouches.push({identifier, pos})
+		if(pos >= 0) {
+			for(let i=0; i<nList[pos].length; i++) {
+				if(nList[pos][i].s==0&&Math.abs(nList[pos][i].t-__time)<0.1) {
+					nList[pos][i].s = 1;
+					result[pos][0]++;
+					break;
 				}
 			}
 		}
-	})
+	}
+}
+function touchend(e) {
+	e.preventDefault();
+	if(__$__$_) {
+		return;
+	}
+	let __time = audio.currentTime;
+	for({identifier} in e.changedTouches) {
+		let idx = -1;
+		for(const [i, touch] in currentTouches.entries()) {
+			if(touch.identifier === identifier) {
+				idx = i;
+				break;
+			}
+		}
+		if(idx >= 0) {
+			currentTouches.splice(idx, 1);
+		}
+	}
+	if(currentTouches.filter(touch => touch.pos === 3).length == 0) {
+		for(let i=0; i<nList[3].length; i++) {
+			if(nList[3][i].b&&nList[3][i].s==1&&nList[3][i].t<__time-0.1&&nList[3][i].t+nList[3][i].d>__time+0.1) {
+				nList[3][i].s = -1;
+				result[3][0]--;
+				result[3][1]++;
+				break;
+			}
+		}
+	}
 }
 
 function auto() {
