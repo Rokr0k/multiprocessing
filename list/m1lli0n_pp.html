@@ -9,7 +9,7 @@
 		<title>M1LLI0N PP</title>
 	</head>
 	<body>
-		<p id='startup'><button id='play' disabled='true'>Play</button>Press P to Start, A for autoplay</p>
+		<p id='startup'><button id='play' disabled='true'>Play</button><button onclick="auto()">Toggle Auto</button>Press P to Start, A for autoplay</p>
 	</body>
 	<script>
 		const bpms = [234, 215, 198, 182, 167, 154, 141, 130, 125, 130, 135, 138, 142, 148, 152, 156, 160, 166, 172, 175, 180, 185, 192, 200, 212, 220, 234]
@@ -1204,6 +1204,24 @@
 			{type: "n", kind: 2, pos: 10.5},
 			{type: "n", kind: 1, pos: 11},
 			{type: "n", kind: 1, pos: 11.5},
+			{type: "n", kind: 1, pos: 16}, // Bridge
+			{type: "n", kind: 2, pos: 80},
+			{type: "n", kind: 2, pos: 81},
+			{type: "n", kind: 2, pos: 82.5},
+			{type: "n", kind: 2, pos: 83.5},
+			{type: "n", kind: 2, pos: 88},
+			{type: "n", kind: 2, pos: 89},
+			{type: "n", kind: 2, pos: 90.5},
+			{type: "n", kind: 2, pos: 91.5},
+			{type: "n", kind: 2, pos: 92.5},
+			{type: "n", kind: 2, pos: 96},
+			{type: "n", kind: 2, pos: 97},
+			{type: "n", kind: 2, pos: 98.5},
+			{type: "n", kind: 2, pos: 99.5},
+			{type: "n", kind: 2, pos: 105},
+			{type: "n", kind: 2, pos: 106.5},
+			{type: "n", kind: 2, pos: 108},
+			{type: "n", kind: 2, pos: 109.5},
 		];
 		let audioFile = "m1lli0n_pp.ogg";
 		let fishFile = "./fish.png";

@@ -8,8 +8,11 @@ let __$__$_ = false;
 audio.addEventListener('canplaythrough', e=>playButton.disabled = false);
 playButton.onclick = function() {
 	init();
-	window.onkeydown = keydown;
-	window.onkeyup = keyup;
+	window.addEventListener("keydown", keydown);
+	window.addEventListener("keyup", keyup);
+	cvs.addEventListener("touchstart", touchstart, false);
+	cvs.addEventListener("touchmove", e => e.preventDefault(), false);
+	cvs.addEventListener("touchend", touchend, false);
 	draw();
 	audio.play();
 };
@@ -17,14 +20,13 @@ window.onkeydown = function(e) {
 	if(!playButton.disabled&&e.code === "KeyP")
 		playButton.onclick();
 	else if(e.code === "KeyA")
-		console.log(auto());
+		auto();
 };
 let nList = [[], [], [], []];
 let result = [[0, 0], [0, 0], [0, 0], [0, 0]];
 let last = 0;
 function init() {
-	cvs = document.createElement('canvas');
-	cvs.id = 'canvas';
+	cvs = document.createElement("canvas");
 	cvs.width = window.innerWidth;
 	cvs.height = window.innerHeight;
 	cvs.style.cursor = "none";
@@ -366,6 +368,59 @@ function keyup(e) {
 			}
 		}
 	}
+}
+
+let touches = {};
+function touchstart(e) {
+	e.preventDefault();
+	if(__$__$_ && !e.auto) {
+		return;
+	}
+	let __time = audio.currentTime;
+	e.changedTouches.forEach(touch => {
+		if(touch.clientX < cvs.width/2) {
+			if(touch.clientY < cvs.height/2) {
+				touches[touch.identifier] = 0;
+			}
+			else {
+				touches[touch.identifier] = 2;
+			}
+		}
+		else {
+			if(touch.clientY < cvs.height/2) {
+				touches[touch.identifier] = 1;
+			}
+			else {
+				touches[touch.identifier] = 3;
+			}
+		}
+		for(let i=0; i<nList[touches[touch.identifier]].length; i++)
+		if(nList[touches[touch.identifier]][i].s==0&&Math.abs(nList[touches[touch.identifier]][i].t-__time)<0.1) {
+			nList[touches[touch.identifier]][i].s = 1;
+			result[touches[touch.identifier]][0]++;
+			return;
+		}
+	})
+}
+function touchend(e) {
+	e.preventDefault();
+	if(__$__$_ && !e.auto) {
+		return;
+	}
+	let __time = audio.currentTime;
+	e.changedTouches.forEach(touch => {
+		delete touches[touch.identifier];
+		if(touches.values().filter(v => v === 3).length === 0) {
+			for(let i=0; i<nList[3].length; i++) {
+				if(nList[3][i].b&&nList[3][i].s==1&&nList[3][i].t<__time-0.1&&nList[3][i].t+nList[3][i].d>__time+0.1) {
+					nList[3][i].s = -1;
+					result[3][0]--;
+					result[3][1]++;
+					return;
+				}
+			}
+		}
+	})
 }
 
 function auto() {
