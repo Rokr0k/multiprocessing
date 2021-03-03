@@ -292,7 +292,9 @@ function keydown(e) {
 	if(keys[e.code]) {
 		return;
 	}
-	keys[e.code] = true;
+	if(!__$__$_) {
+		keys[e.code] = true;
+	}
 	let __time = audio.currentTime;
 	switch(e.code) {
 	case "KeyF":	// F
@@ -362,14 +364,11 @@ function keydown(e) {
 	}
 }
 function keyup(e) {
-	if(!keys[e.code]) {
+	if(!keys[e.code] || __$__$_) {
 		return;
 	}
 	keys[e.code] = false;
 	if(e.code === "KeyK" || e.code === "KeyE") {		// K
-		if(__$__$_ && !e.auto) {
-			return;
-		}
 		let __time = audio.currentTime;
 		for(let i=0; i<nList[3].length; i++) {
 			if(nList[3][i].b&&nList[3][i].s==1&&nList[3][i].t<__time-0.1&&nList[3][i].t+nList[3][i].d>__time+0.1) {
