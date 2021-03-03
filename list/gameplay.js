@@ -287,7 +287,12 @@ function draw() {
 	requestAnimationFrame(draw);
 }
 let finished = false;
+let keys = {};
 function keydown(e) {
+	if(keys[e.code]) {
+		return;
+	}
+	keys[e.code] = true;
 	let __time = audio.currentTime;
 	switch(e.code) {
 	case "KeyF":	// F
@@ -357,6 +362,10 @@ function keydown(e) {
 	}
 }
 function keyup(e) {
+	if(!keys[e.code]) {
+		return;
+	}
+	keys[e.code] = false;
 	if(e.code === "KeyK" || e.code === "KeyE") {		// K
 		if(__$__$_ && !e.auto) {
 			return;
@@ -410,7 +419,6 @@ function touchstart(e) {
 	}
 }
 function touchend(e) {
-	e.preventDefault();
 	if(__$__$_) {
 		return;
 	}
