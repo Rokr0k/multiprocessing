@@ -346,7 +346,7 @@ function keydown(e) {
 				break;
 			}
 		}
-		break;//*/
+		break;/*/
 	case "Space":	// Debug Mode
 		if(audio.paused)
 			audio.play();
